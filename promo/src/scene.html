@@ -1,0 +1,77 @@
+<!doctype html><html lang="fa"><head><meta charset="utf-8"><link rel="stylesheet" href="common.css">
+<style>
+.bgm{position:absolute;inset:-60px;background:url(../../core/static/core/contours.svg) center/cover;opacity:.9}
+.sc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:36px;padding:0 70px;opacity:0}
+.reel .sc{padding:200px 70px 260px}.post .sc{padding:60px 70px}
+.p{opacity:0}
+.big{font-weight:900;line-height:1.3}.reel .big{font-size:132px}.post .big{font-size:108px}
+.tag{font-weight:800}.reel .tag{font-size:60px}.post .tag{font-size:50px}
+.h2{font-weight:800;font-size:64px}.post .h2{font-size:54px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;width:100%}
+.reel .chip{font-size:46px;padding:34px 28px;flex-direction:column;text-align:center;gap:18px}.reel .chip .ic{width:110px;height:110px}.reel .chip .ic svg{width:64px;height:64px}
+.post .chip{font-size:40px;padding:26px 24px}
+.feat{background:#fff;border:2px solid var(--line);border-radius:34px;padding:34px 40px;font-size:52px;font-weight:800;width:100%;display:flex;align-items:center;gap:28px;box-shadow:0 22px 44px -24px #12353f66;text-align:right}
+.post .feat{font-size:44px;padding:26px 34px}
+.feat i{width:30px;height:30px;border-radius:50%;background:var(--ac);flex:none}
+.day{font-weight:900;color:var(--pri);line-height:1}.reel .day{font-size:420px}.post .day{font-size:330px}
+.mon{font-weight:900}.reel .mon{font-size:130px}.post .mon{font-size:104px}
+.url{direction:ltr;font-weight:900;color:var(--pri)}.reel .url{font-size:66px}.post .url{font-size:58px}
+.prog{position:absolute;left:0;bottom:0;height:10px;background:var(--ac);width:0}
+.dot{position:absolute;border-radius:50%;background:var(--ac);opacity:.5}
+</style></head><body>
+<div class="bgm" id="bgm"></div>
+<div id="dots"></div>
+<section class="sc" id="s1"><div class="p logo" style="font-size:44px" data-d=".1"><i id="lg" style="width:90px;height:90px;border-radius:24px"></i>postgis.ir</div>
+ <div class="p pill" style="font-size:44px" data-d=".5"><b></b>ارومیه · پنجشنبه ۲۸ آبان ۱۴۰۵</div>
+ <div class="p big" data-d=".8">روز جهانی GIS<br>ارومیه</div></section>
+<section class="sc" id="s2"><div class="p tag" data-d=".05"><mark>GeoAI</mark></div>
+ <div class="p h2" data-d=".15">هوش مصنوعی در علوم مکانی</div>
+ <div class="p card" style="width:100%" data-d=".25"><div id="map"></div><div class="code" id="code"></div></div></section>
+<section class="sc" id="s3"><div class="p h2" data-d=".0" style="font-size:72px">فراخوان باز است</div>
+ <div class="p note" data-d=".1" style="font-size:38px;color:var(--mut)">چهار راه برای مشارکت</div>
+ <div class="grid" id="chips"></div></section>
+<section class="sc" id="s4"><div class="p h2" data-d="0">چرا شرکت کنیم؟</div>
+ <div class="p feat" data-d=".15"><i></i>شبکه‌سازی با متخصصان</div>
+ <div class="p feat" data-d=".4"><i></i>رونمایی از محصولات هوشمند</div>
+ <div class="p feat" data-d=".65"><i></i>ویژه دانشجویان و پژوهشگران</div>
+ <div class="p feat" data-d=".9"><i></i>حضوری + پخش آنلاین</div></section>
+<section class="sc" id="s5"><div class="p pill" style="font-size:44px" data-d=".05"><b></b>پنجشنبه</div>
+ <div class="p day" data-d=".15">۲۸</div><div class="p mon" data-d=".3">آبان ۱۴۰۵</div>
+ <div class="p tag" data-d=".5" style="color:var(--mut)">ارومیه · مکان به‌زودی اعلام می‌شود</div></section>
+<section class="sc" id="s6"><div class="p logo" style="font-size:44px" data-d="0"><i id="lg2" style="width:90px;height:90px;border-radius:24px"></i>روز جهانی GIS ارومیه</div>
+ <div class="p big" data-d=".1" style="font-size:96px"><mark>سخنران؛ ارائه؛ کارگاه</mark></div>
+ <div class="p h2" data-d=".3">پیشنهاد خود را ارسال کنید</div>
+ <div class="p btn gold" data-d=".5" id="cta"><span class="url" style="color:#3a2800">event.postgis.ir</span></div>
+ <div class="p dead" data-d=".7" style="font-size:40px;font-weight:700;color:#7a5200;background:var(--acsoft);padding:8px 36px;border-radius:99px">مهلت ارسال پیشنهاد: ۱۵ آبان</div></section>
+<div class="prog" id="prog"></div>
+<script src="common.js"></script>
+<script>
+const f=new URLSearchParams(location.search).get('fmt')||'reel';document.body.className=f;
+document.getElementById('lg').innerHTML=IC.mark;document.getElementById('lg2').innerHTML=IC.mark;
+document.getElementById('chips').innerHTML=CHIPS.map((c,i)=>`<div class="p chip" data-d="${.2+i*.22}"><span class="ic">${IC[c[0]]}</span>${c[1]}</div>`).join('');
+const MH=f=='reel'?420:300;
+const SC=[[1,0,2],[2,2,4],[3,4,6],[4,6,8],[5,8,10],[6,10,12]].map(([n,s,e])=>({el:document.getElementById('s'+n),s,e,n}));
+const DUR=12,codeEl=document.getElementById('code'),mapEl=document.getElementById('map');
+const plain=CODE.replace(/<[^>]+>/g,'');
+// typing over the html: reveal N visible chars
+function typed(n){let out='',vis=0,i=0;while(i<CODE.length&&vis<n){if(CODE[i]=='<'){const j=CODE.indexOf('>',i);out+=CODE.slice(i,j+1);i=j+1}else{out+=CODE[i];vis++;i++}}return out+'<span style="opacity:.8">▌</span>'}
+const dots=[];for(let i=0;i<14;i++){const d=document.createElement('div');d.className='dot';const r=8+(i*7)%14;d.style.width=d.style.height=r+'px';dots.push([d,(i*173)%1000/1000,(i*389)%1000/1000,r,.3+(i%5)*.12]);document.getElementById('dots').appendChild(d)}
+const E=x=>1-Math.pow(1-clamp(x),3),B=x=>{x=clamp(x);const c=1.4;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+function render(t){
+  const H=document.body.clientHeight;
+  document.getElementById('bgm').style.transform=`translate(${-t*10}px,${t*6}px) scale(${1.05+t*.004})`;
+  dots.forEach(([d,x,y,r,sp],i)=>{d.style.left=(x*1080)+'px';d.style.top=((y*H-t*40*sp*3)%H+H)%H+'px';d.style.opacity=.25+.2*Math.sin(t*2+i)});
+  document.getElementById('prog').style.width=(t/DUR*1080)+'px';
+  SC.forEach(({el,s,e,n})=>{
+    const lt=t-s;const inn=E(lt/.35),out=n==6?1:1-E((t-(e-.3))/.3);
+    el.style.opacity=lt<-.05||t>e+.05?0:Math.min(inn,out);
+    el.style.transform=`translateX(${(1-inn)*60}px) translateX(${n==6?0:(1-out)*-60}px)`;
+    el.querySelectorAll('.p').forEach(p=>{const d=parseFloat(p.dataset.d||0);const k=B((lt-d)/.55);const o=E((lt-d)/.3);
+      p.style.opacity=o;p.style.transform=`translateY(${(1-k)*50}px) scale(${.92+.08*k})`});
+    if(n==2){mapEl.innerHTML=mapSVG(clamp((lt-.2)/1.5),960,MH);const sv=mapEl.firstChild;sv.setAttribute('preserveAspectRatio','xMidYMid slice');
+      codeEl.innerHTML=typed(Math.floor(clamp((lt-.5)/1.3)*plain.length))}
+    if(n==6){const c=document.getElementById('cta');const pu=1+.04*Math.sin(lt*7)*E(lt-.6);c.style.transform+=` scale(${pu})`}
+  });
+}
+window.render=render;render(0);
+</script></body></html>

@@ -1,0 +1,37 @@
+<!doctype html><html lang="fa"><head><meta charset="utf-8"><link rel="stylesheet" href="common.css">
+<style>
+.wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.reel .wrap{padding:190px 70px 210px;gap:24px;justify-content:space-between}
+.post .wrap{padding:70px 70px 64px;gap:22px;justify-content:space-between}
+h1{font-weight:900;line-height:1.25}.reel h1{font-size:104px}.post h1{font-size:104px}
+.tag{font-weight:800}.reel .tag{font-size:56px}.post .tag{font-size:48px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;width:100%}
+.post .chip{font-size:34px;padding:14px 22px}.post .chip .ic{width:68px;height:68px}
+.note{font-size:36px;color:var(--mut);font-weight:500}.note b{color:var(--pri)}
+.post .note{font-size:30px}
+.dead{font-size:34px;font-weight:700;color:#7a5200;background:var(--acsoft);padding:6px 30px;border-radius:99px}
+.url{direction:ltr;font-size:46px;font-weight:800;margin-top:14px}
+.card,.grid,.top{flex:none}
+.reel .note{font-size:32px}
+.top{display:flex;justify-content:space-between;align-items:center;width:100%}
+</style></head><body>
+<div class="bg"></div>
+<div class="wrap">
+ <div class="top"><div class="logo"><i id="lg"></i>روز جهانی GIS</div><div class="pill"><b></b>ارومیه</div></div>
+ <div><span class="pill" style="font-size:40px"><b></b>پنجشنبه ۲۸ آبان ۱۴۰۵</span>
+  <h1 style="margin-top:22px">روز جهانی GIS ارومیه</h1>
+  <div class="tag" style="margin-top:10px"><mark>GeoAI | هوش مصنوعی در علوم مکانی</mark></div></div>
+ <div class="card" id="mapcard" style="width:100%"><div id="map"></div><div class="code" id="code"></div></div>
+ <div class="grid" id="chips"></div>
+ <div class="note">شبکه‌سازی با متخصصان <b>•</b> رونمایی از محصولات هوشمند</div>
+ <div><div class="dead">فراخوان باز است · مهلت ارسال پیشنهاد: ۱۵ آبان</div><div class="url">event.postgis.ir</div></div>
+</div>
+<script src="common.js"></script>
+<script>
+const f=new URLSearchParams(location.search).get('fmt')||'reel';document.body.className=f;
+document.getElementById('lg').innerHTML=IC.mark;
+document.getElementById('map').innerHTML=mapSVG(1,960,380);
+const sv=document.getElementById('map').firstChild;sv.setAttribute('height',f=='reel'?380:340);sv.setAttribute('preserveAspectRatio','xMidYMid slice');
+if(f=='post')document.getElementById('code').remove();else document.getElementById('code').innerHTML=CODE;
+document.getElementById('chips').innerHTML=CHIPS.map(c=>`<div class="chip"><span class="ic">${IC[c[0]]}</span>${c[1]}</div>`).join('');
+</script></body></html>
