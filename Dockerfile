@@ -2,7 +2,10 @@ FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 DATA_DIR=/data
 WORKDIR /app
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Slow/blocked PyPI from the build server: raise timeouts and allow a mirror via PIP_INDEX_URL.
+ARG PIP_INDEX_URL=https://pypi.org/simple
+ENV PIP_DEFAULT_TIMEOUT=120 PIP_RETRIES=10 PIP_DISABLE_PIP_VERSION_CHECK=1
+RUN pip install --no-cache-dir --index-url "$PIP_INDEX_URL" -r requirements.txt
 COPY . .
 RUN SECRET_KEY=build-only python manage.py collectstatic --noinput
 EXPOSE 8000

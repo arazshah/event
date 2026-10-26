@@ -14,6 +14,7 @@ Django + SQLite. فراخوان (۴ نوع)، پیش‌ثبت‌نام/ثبت‌
    | `ADMIN_USERNAME` | پیش‌فرض `admin` |
    | `ALLOWED_HOSTS` | پیش‌فرض `event.postgis.ir,localhost,127.0.0.1` (localhost برای healthcheck لازم است) |
    | `CSRF_TRUSTED_ORIGINS` | پیش‌فرض `https://event.postgis.ir` |
+   - `PIP_INDEX_URL` (اختیاری، **Available at Buildtime**): اگر سرور شما به pypi.org دسترسی ندارد یا کند است، آدرس یک mirror قابل‌دسترس را بدهید (مثلاً `https://mirrors.aliyun.com/pypi/simple/`).
 5. Deploy. پنل: `/admin/`. بعد از اولین ورود رمز را از «تغییر گذرواژه» عوض کنید.
 
 اگر `ADMIN_PASSWORD` ندهید، رمز تصادفی در لاگ اولین اجرا چاپ می‌شود.
