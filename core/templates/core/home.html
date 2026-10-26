@@ -1,0 +1,79 @@
+{% extends "core/base.html" %}{% load core_extras %}
+{% block content %}
+<section class="hero">
+  <div class="wrap">
+    <p class="chip">{{ S.tagline }}</p>
+    <h1>{{ S.event_name }}</h1>
+    <p class="lead">{{ S.hero_text }}</p>
+    <ul class="facts">
+      <li><span>📅 تاریخ</span><b>{{ S.event_date|jdate }}</b></li>
+      <li><span>🕒 ساعت</span><b>{{ S.time_text|default:"—" }}</b></li>
+      <li><span>📍 مکان</span><b>{{ S.city }}{% if S.venue_text %} — {% if S.venue_url %}<a href="{{ S.venue_url }}">{{ S.venue_text }}</a>{% else %}{{ S.venue_text }}{% endif %}{% endif %}</b></li>
+      <li><span>🎥 برگزاری</span><b>{{ S.format_text|default:"—" }}</b></li>
+    </ul>
+    <div class="cta">
+      {% if S.call_open %}<a class="btn" href="{% url 'core:call' %}">ارسال پیشنهاد (تا {{ S.call_deadline|jshort }})</a>{% endif %}
+      <a class="btn ghost" href="{% url 'core:register' %}">{% if S.is_registration %}ثبت‌نام شرکت‌کنندگان{% else %}پیش‌ثبت‌نام شرکت‌کنندگان{% endif %}</a>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="wrap block">
+  <h2>چرا شرکت کنیم؟</h2>
+  <div class="grid3">
+    <div class="card"><h3>🤝 شبکه‌سازی</h3><p>{{ S.networking_text }}</p></div>
+    <div class="card"><h3>🚀 رونمایی</h3><p>{{ S.unveil_text }}</p></div>
+    <div class="card"><h3>🎓 ویژه دانشجویان</h3><p>تازه‌ترین خبرها و مباحث تخصصی هوش مصنوعی در علوم مکانی، همراه با ارائه‌های کوتاه دانشجویی.</p></div>
+  </div>
+  {% if S.track_list %}
+  <h3 class="sub">زیرمحورها</h3>
+  <ul class="tracks">{% for t in S.track_list %}<li>{{ t }}</li>{% endfor %}</ul>
+  {% endif %}
+</section>
+
+{% if S.call_open %}
+<section id="call" class="band">
+  <div class="wrap block">
+    <h2>فراخوان</h2>
+    <p class="muted">مهلت ارسال پیشنهاد: <b>{{ S.call_deadline|jdate }}</b></p>
+    <div class="grid4">
+      <a class="card link" href="{% url 'core:call' %}?type=speaker"><h3>🎤 سخنران</h3><p>سخنرانی تخصصی و تجربه‌محور درباره GeoAI.</p></a>
+      <a class="card link" href="{% url 'core:call' %}?type=presentation"><h3>📊 ارائه</h3><p>ارائه پژوهشی: پروژه، مقاله یا پایان‌نامه (۵ یا ۲۰ دقیقه).</p></a>
+      <a class="card link" href="{% url 'core:call' %}?type=workshop"><h3>🛠 کارگاه</h3><p>کارگاه عملی ۶۰ تا ۹۰ دقیقه‌ای.</p></a>
+      <a class="card link" href="{% url 'core:call' %}?type=online_abroad"><h3>🌐 ارائه آنلاین</h3><p>برای متخصصان خارج از کشور، به‌صورت آنلاین.</p></a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if organizers or scientific %}
+<section class="wrap block">
+  {% if scientific %}<h2>کمیته علمی</h2>
+  <div class="people">{% for m in scientific %}{% include "core/_person.html" %}{% endfor %}</div>{% endif %}
+  {% if organizers %}<h2>تیم برگزاری</h2>
+  <div class="people">{% for m in organizers %}{% include "core/_person.html" %}{% endfor %}</div>{% endif %}
+</section>
+{% endif %}
+
+{% if partner_groups %}
+<section class="wrap block">
+  {% for title, items in partner_groups %}
+  <h3 class="sub">{{ title }}</h3>
+  <div class="logos">{% for p in items %}
+    {% if p.url %}<a href="{{ p.url }}" rel="noopener" class="logo">{% else %}<span class="logo">{% endif %}
+    {% if p.logo %}<img src="{{ p.logo.url }}" alt="{{ p.name }}">{% endif %}<em>{{ p.name }}</em>
+    {% if p.url %}</a>{% else %}</span>{% endif %}{% endfor %}</div>
+  {% endfor %}
+</section>
+{% endif %}
+
+{% if S.show_sponsors_section %}
+<section class="band">
+  <div class="wrap block center">
+    <h2>حامی رویداد شوید</h2>
+    <p class="muted">معرفی برند شما به متخصصان و دانشجویان GIS و هوش مصنوعی.</p>
+    <a class="btn" href="{% url 'core:sponsor' %}">مشاهده سطوح حمایت</a>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

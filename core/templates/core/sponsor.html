@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+{% block title %}حامیان | {{ S.event_name }}{% endblock %}
+{% block content %}
+<section class="wrap narrow block">
+  <h1>حامی رویداد شوید</h1>
+  <p>این رویداد برای دانشجویان و متخصصان GIS و هوش مصنوعی برگزار می‌شود. سطوح حمایت:</p>
+  <div class="grid3">{% for l in levels %}
+    <div class="card"><h3>{{ l.title }}</h3><ul class="bul">{% for b in l.benefit_list %}<li>{{ b }}</li>{% endfor %}</ul></div>
+  {% endfor %}</div>
+  <h2>درخواست همکاری</h2>
+  <form method="post" class="form">{% csrf_token %}
+    {% include "core/_form.html" %}
+    <button class="btn" type="submit">ارسال درخواست</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% if form.non_field_errors %}<div class="errors">{{ form.non_field_errors }}</div>{% endif %}
+<div class="hp" aria-hidden="true">{{ form.website_url }}</div>
+{% for field in form %}{% if field.name != "website_url" %}
+<div class="field{% if field.errors %} has-err{% endif %}">
+  <label{% if field.field.widget.input_type != "radio" %} for="{{ field.id_for_label }}"{% endif %}>{{ field.label }}{% if field.field.required %} <b>*</b>{% endif %}</label>
+  {{ field }}
+  {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+  {% for e in field.errors %}<small class="err">{{ e }}</small>{% endfor %}
+</div>
+{% endif %}{% endfor %}

@@ -1,0 +1,35 @@
+{% load static core_extras %}<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ S.event_name }} | {{ S.tagline }}{% endblock %}</title>
+<meta name="description" content="{{ S.hero_text|truncatechars:160 }}">
+<link rel="stylesheet" href="{% static 'core/site.css' %}">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="{% url 'core:home' %}" class="brand">🌍 {{ S.event_name }}</a>
+    <nav>
+      <a href="{% url 'core:home' %}#about">درباره</a>
+      {% if S.call_open %}<a href="{% url 'core:call' %}">فراخوان</a>{% endif %}
+      {% if S.show_sponsors_section %}<a href="{% url 'core:sponsor' %}">حامیان</a>{% endif %}
+      <a href="{% url 'core:register' %}" class="btn small">{% if S.is_registration %}ثبت‌نام{% else %}پیش‌ثبت‌نام{% endif %}</a>
+    </nav>
+  </div>
+</header>
+<main>{% block content %}{% endblock %}</main>
+<footer>
+  <div class="wrap">
+    <p>{{ S.event_name }} — {{ S.city }}، {{ S.event_date|jdate }}</p>
+    <p class="links">
+      {% if S.contact_email %}<a href="mailto:{{ S.contact_email }}">{{ S.contact_email }}</a>{% endif %}
+      {% if S.contact_phone %}<span dir="ltr">{{ S.contact_phone }}</span>{% endif %}
+      {% if S.telegram_url %}<a href="{{ S.telegram_url }}" rel="noopener">تلگرام</a>{% endif %}
+      {% if S.instagram_url %}<a href="{{ S.instagram_url }}" rel="noopener">اینستاگرام</a>{% endif %}
+    </p>
+  </div>
+</footer>
+</body>
+</html>

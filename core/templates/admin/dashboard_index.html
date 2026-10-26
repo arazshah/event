@@ -1,0 +1,12 @@
+{% extends "admin/index.html" %}
+{% block content %}
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px">
+  {% for label, n in stats %}
+  <div style="background:var(--darkened-bg,#f5f5f5);border:1px solid var(--hairline-color,#ddd);border-radius:8px;padding:12px 18px;min-width:130px">
+    <div style="font-size:26px;font-weight:700">{{ n }}</div>
+    <div style="font-size:13px;opacity:.8">{{ label }}</div>
+  </div>
+  {% endfor %}
+</div>
+{{ block.super }}
+{% endblock %}

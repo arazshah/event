@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}{% load core_extras %}
+{% block title %}فراخوان | {{ S.event_name }}{% endblock %}
+{% block content %}
+<section class="wrap narrow block">
+  <h1>فراخوان ارائه، سخنرانی و کارگاه</h1>
+  <p class="muted">محور: {{ S.tagline }} — مهلت ارسال: <b>{{ S.call_deadline|jdate }}</b></p>
+  {% if not S.call_open %}<div class="errors">فراخوان بسته شده است.</div>{% else %}
+  <form method="post" enctype="multipart/form-data" class="form">{% csrf_token %}
+    {% include "core/_form.html" %}
+    <button class="btn" type="submit">ارسال پیشنهاد</button>
+  </form>{% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+{% block content %}
+<section class="wrap narrow block center">
+  <h1>✅ ثبت شد</h1>
+  {% if what == "call" %}<p>پیشنهاد شما دریافت شد. نتیجه داوری پس از پایان مهلت فراخوان به ایمیل شما اطلاع داده می‌شود.</p>
+  {% elif what == "register" %}<p>پیش‌ثبت‌نام شما انجام شد. زمان ثبت‌نام اصلی و مکان رویداد را به شما اطلاع می‌دهیم.</p>
+  {% elif what == "register-final" %}
+    <p>ثبت‌نام شما انجام شد.</p>
+    {% if S.registration_note %}<p>{{ S.registration_note }}</p>{% endif %}
+    {% if S.payment_link %}<p><a class="btn" href="{{ S.payment_link }}" rel="noopener">پرداخت از طریق زرین‌پال</a></p>
+    <p class="muted">ثبت‌نام شما پس از تأیید پرداخت کامل می‌شود.</p>{% endif %}
+  {% else %}<p>درخواست شما دریافت شد و به‌زودی با شما تماس می‌گیریم.</p>{% endif %}
+  <p><a href="{% url 'core:home' %}">بازگشت به صفحه اصلی</a></p>
+</section>
+{% endblock %}

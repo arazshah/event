@@ -1,0 +1,2 @@
+<div class="person">{% if m.photo %}<img src="{{ m.photo.url }}" alt="{{ m.name }}">{% else %}<div class="avatar">{{ m.name|slice:":1" }}</div>{% endif %}
+<b>{{ m.name }}</b><small>{{ m.role }}</small></div>
