@@ -9,7 +9,7 @@ Django + SQLite. فراخوان (۴ نوع)، پیش‌ثبت‌نام/ثبت‌
 4. Environment Variables:
    | نام | توضیح |
    |---|---|
-   | `SECRET_KEY` | **الزامی**، رشته تصادفی بلند |
+   | `SECRET_KEY` | پیشنهادی؛ اگر ندهید، یک کلید تصادفی در `/data/secret_key` ساخته می‌شود |
    | `ADMIN_PASSWORD` | رمز اولیه ادمین (فقط وقتی هنوز ادمینی نیست استفاده می‌شود) |
    | `ADMIN_USERNAME` | پیش‌فرض `admin` |
    | `ALLOWED_HOSTS` | پیش‌فرض `event.postgis.ir,localhost,127.0.0.1` (localhost برای healthcheck لازم است) |

@@ -11,11 +11,27 @@ def env_list(name, default=""):
 
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "0") == "1"
-SECRET_KEY = os.environ.get("SECRET_KEY") or (
-    "dev-insecure-key" if DEBUG else None
-)
-if not SECRET_KEY:
-    raise RuntimeError("SECRET_KEY environment variable is required when DEBUG is off.")
+
+
+def _load_secret_key():
+    key = os.environ.get("SECRET_KEY")
+    if key:
+        return key
+    if DEBUG:
+        return "dev-insecure-key"
+    # No env var: generate once and keep it on the persistent volume.
+    path = DATA_DIR / "secret_key"
+    if path.exists():
+        return path.read_text().strip()
+    import secrets
+
+    key = secrets.token_urlsafe(50)
+    path.write_text(key)
+    path.chmod(0o600)
+    return key
+
+
+SECRET_KEY = _load_secret_key()
 
 ALLOWED_HOSTS = env_list("ALLOWED_HOSTS", "event.postgis.ir,localhost,127.0.0.1")
 CSRF_TRUSTED_ORIGINS = env_list("CSRF_TRUSTED_ORIGINS", "https://event.postgis.ir")
