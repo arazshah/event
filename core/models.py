@@ -232,3 +232,34 @@ class SponsorInquiry(models.Model):
 
     def __str__(self):
         return self.company
+
+
+class ImportantDate(models.Model):
+    title = models.CharField("عنوان", max_length=120)
+    date_text = models.CharField("تاریخ (متن آزاد)", max_length=80)
+    order = models.PositiveIntegerField("ترتیب", default=0)
+    highlight = models.BooleanField("پررنگ (مثلاً روز رویداد)", default=False)
+    visible = models.BooleanField("نمایش", default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "تاریخ مهم"
+        verbose_name_plural = "تاریخ‌های مهم"
+
+    def __str__(self):
+        return self.title
+
+
+class FAQ(models.Model):
+    question = models.CharField("پرسش", max_length=200)
+    answer = models.TextField("پاسخ")
+    order = models.PositiveIntegerField("ترتیب", default=0)
+    visible = models.BooleanField("نمایش", default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "پرسش متداول"
+        verbose_name_plural = "پرسش‌های متداول"
+
+    def __str__(self):
+        return self.question

@@ -1,48 +1,74 @@
 {% extends "core/base.html" %}{% load core_extras %}
 {% block content %}
 <section class="hero">
-  <div class="wrap">
-    <p class="chip">{{ S.tagline }}</p>
-    <h1>{{ S.event_name }}</h1>
-    <p class="lead">{{ S.hero_text }}</p>
-    <ul class="facts">
-      <li><span>📅 تاریخ</span><b>{{ S.event_date|jdate }}</b></li>
-      <li><span>🕒 ساعت</span><b>{{ S.time_text|default:"—" }}</b></li>
-      <li><span>📍 مکان</span><b>{{ S.city }}{% if S.venue_text %} — {% if S.venue_url %}<a href="{{ S.venue_url }}">{{ S.venue_text }}</a>{% else %}{{ S.venue_text }}{% endif %}{% endif %}</b></li>
-      <li><span>🎥 برگزاری</span><b>{{ S.format_text|default:"—" }}</b></li>
-    </ul>
-    <div class="cta">
-      {% if S.call_open %}<a class="btn" href="{% url 'core:call' %}">ارسال پیشنهاد (تا {{ S.call_deadline|jshort }})</a>{% endif %}
-      <a class="btn ghost" href="{% url 'core:register' %}">{% if S.is_registration %}ثبت‌نام شرکت‌کنندگان{% else %}پیش‌ثبت‌نام شرکت‌کنندگان{% endif %}</a>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><i></i>{{ S.city }} · {{ S.event_date|jdate }}</span>
+      <h1>{{ S.event_name }}<br><mark>{{ S.tagline }}</mark></h1>
+      <p class="lead">{{ S.hero_text }}</p>
+      <div class="cta">
+        {% if S.call_open %}<a class="btn" href="{% url 'core:call' %}">ارسال پیشنهاد سخنرانی / ارائه / کارگاه</a>{% endif %}
+        <a class="btn ghost" href="{% url 'core:register' %}">{% if S.is_registration %}ثبت‌نام شرکت‌کنندگان{% else %}پیش‌ثبت‌نام (رایگان){% endif %}</a>
+      </div>
+      <ul class="checks"><li>حضوری + پخش آنلاین</li><li>ویژه دانشجویان و متخصصان</li><li>رونمایی از محصولات هوشمند</li></ul>
+    </div>
+    <div class="ticket" aria-label="شمارش معکوس">
+      <div class="ticket-top">تا شروع رویداد <span>{{ S.event_date|jshort }}</span></div>
+      <div class="count" id="count" data-date="{{ S.event_date|iso }}"><div><b id="cd">–</b><small>روز</small></div><div><b id="ch">–</b><small>ساعت</small></div><div><b id="cm">–</b><small>دقیقه</small></div><div><b id="cs">–</b><small>ثانیه</small></div></div>
+      <div class="code"><span class="k">SELECT</span> * <span class="k">FROM</span> gis_day
+<span class="k">WHERE</span> city = <span class="s">'Urmia'</span>
+  <span class="k">AND</span> topic = <span class="s">'GeoAI'</span>
+  <span class="k">AND</span> date = <span class="s">'{{ S.event_date|iso }}'</span>;</div>
+      <div class="ticket-foot">نتیجه <span>۱ رویداد · ۴ حالت مشارکت</span></div>
     </div>
   </div>
 </section>
 
+<section class="wrap">
+  <ul class="facts">
+    <li><span>📅 تاریخ</span><b>{{ S.event_date|jdate }}</b></li>
+    <li><span>🕒 ساعت</span><b>{{ S.time_text|default:"—" }}</b></li>
+    <li><span>📍 مکان</span><b>{{ S.city }}{% if S.venue_text %} — {% if S.venue_url %}<a href="{{ S.venue_url }}">{{ S.venue_text }}</a>{% else %}{{ S.venue_text }}{% endif %}{% endif %}</b></li>
+    <li><span>🎥 برگزاری</span><b>{{ S.format_text|default:"—" }}</b></li>
+  </ul>
+</section>
+
 <section id="about" class="wrap block">
-  <h2>چرا شرکت کنیم؟</h2>
+  <p class="eyebrow">چرا شرکت کنیم؟</p>
+  <h2>یک روز، تمام نقشه‌ی GeoAI</h2>
   <div class="grid3">
-    <div class="card"><h3>🤝 شبکه‌سازی</h3><p>{{ S.networking_text }}</p></div>
-    <div class="card"><h3>🚀 رونمایی</h3><p>{{ S.unveil_text }}</p></div>
-    <div class="card"><h3>🎓 ویژه دانشجویان</h3><p>تازه‌ترین خبرها و مباحث تخصصی هوش مصنوعی در علوم مکانی، همراه با ارائه‌های کوتاه دانشجویی.</p></div>
+    <div class="card"><div class="ic">🤝</div><h3>شبکه‌سازی با متخصصان</h3><p>{{ S.networking_text }}</p></div>
+    <div class="card"><div class="ic">🚀</div><h3>رونمایی محصولات هوشمند</h3><p>{{ S.unveil_text }}</p></div>
+    <div class="card"><div class="ic">🎓</div><h3>ویژه دانشجویان</h3><p>تازه‌ترین خبرها و مباحث تخصصی هوش مصنوعی در علوم مکانی، همراه با ارائه‌های کوتاه دانشجویی.</p></div>
+    <div class="card"><div class="ic">🛠</div><h3>کارگاه‌های عملی</h3><p>یاد بگیرید و همان‌جا تمرین کنید؛ از داده مکانی تا مدل هوشمند.</p></div>
+    <div class="card"><div class="ic">🎤</div><h3>سخنرانان متخصص</h3><p>تجربه‌ی واقعی پژوهشگران و فعالان صنعت GIS و هوش مصنوعی.</p></div>
+    <div class="card"><div class="ic">🌐</div><h3>حضور از هر جا</h3><p>پخش آنلاین برای علاقه‌مندان شهرهای دیگر و ارائه‌ی آنلاین از خارج از کشور.</p></div>
   </div>
-  {% if S.track_list %}
-  <h3 class="sub">زیرمحورها</h3>
-  <ul class="tracks">{% for t in S.track_list %}<li>{{ t }}</li>{% endfor %}</ul>
-  {% endif %}
+  {% if S.track_list %}<h3 class="sub">زیرمحورهای رویداد</h3>
+  <ul class="tracks">{% for t in S.track_list %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
+  <ul class="audience"><li>دانشجویان GIS و عمران</li><li>پژوهشگران سنجش‌ازدور</li><li>توسعه‌دهندگان و تحلیلگران داده</li><li>مدیران و کارشناسان شهری</li><li>استارتاپ‌ها و شرکت‌های فناور</li></ul>
 </section>
 
 {% if S.call_open %}
 <section id="call" class="band">
   <div class="wrap block">
-    <h2>فراخوان</h2>
-    <p class="muted">مهلت ارسال پیشنهاد: <b>{{ S.call_deadline|jdate }}</b></p>
+    <p class="eyebrow">فراخوان</p>
+    <h2>تجربه‌تان را به اشتراک بگذارید</h2>
+    <p class="muted">مهلت ارسال پیشنهاد: <b>{{ S.call_deadline|jdmy }}</b></p>
     <div class="grid4">
-      <a class="card link" href="{% url 'core:call' %}?type=speaker"><h3>🎤 سخنران</h3><p>سخنرانی تخصصی و تجربه‌محور درباره GeoAI.</p></a>
-      <a class="card link" href="{% url 'core:call' %}?type=presentation"><h3>📊 ارائه</h3><p>ارائه پژوهشی: پروژه، مقاله یا پایان‌نامه (۵ یا ۲۰ دقیقه).</p></a>
-      <a class="card link" href="{% url 'core:call' %}?type=workshop"><h3>🛠 کارگاه</h3><p>کارگاه عملی ۶۰ تا ۹۰ دقیقه‌ای.</p></a>
-      <a class="card link" href="{% url 'core:call' %}?type=online_abroad"><h3>🌐 ارائه آنلاین</h3><p>برای متخصصان خارج از کشور، به‌صورت آنلاین.</p></a>
+      <a class="card link" href="{% url 'core:call' %}?type=speaker"><div class="ic">🎤</div><h3>سخنران</h3><p>سخنرانی تخصصی و تجربه‌محور درباره GeoAI.</p><span class="go">ارسال پیشنهاد ←</span></a>
+      <a class="card link" href="{% url 'core:call' %}?type=presentation"><div class="ic">📊</div><h3>ارائه</h3><p>ارائه پژوهشی: پروژه، مقاله یا پایان‌نامه (۵ یا ۲۰ دقیقه).</p><span class="go">ارسال پیشنهاد ←</span></a>
+      <a class="card link" href="{% url 'core:call' %}?type=workshop"><div class="ic">🛠</div><h3>کارگاه</h3><p>کارگاه عملی ۶۰ تا ۹۰ دقیقه‌ای.</p><span class="go">ارسال پیشنهاد ←</span></a>
+      <a class="card link" href="{% url 'core:call' %}?type=online_abroad"><div class="ic">🌐</div><h3>ارائه آنلاین</h3><p>برای متخصصان خارج از کشور، به‌صورت آنلاین.</p><span class="go">ارسال پیشنهاد ←</span></a>
     </div>
   </div>
+</section>
+{% endif %}
+
+{% if dates %}
+<section id="dates" class="wrap narrow block">
+  <p class="eyebrow">برنامه‌ی زمانی</p><h2>تاریخ‌های مهم</h2>
+  <ul class="tl">{% for d in dates %}<li{% if d.highlight %} class="hl"{% endif %}><b>{{ d.title }}</b><span>{{ d.date_text }}</span></li>{% endfor %}</ul>
 </section>
 {% endif %}
 
@@ -67,13 +93,44 @@
 </section>
 {% endif %}
 
-{% if S.show_sponsors_section %}
-<section class="band">
-  <div class="wrap block center">
-    <h2>حامی رویداد شوید</h2>
-    <p class="muted">معرفی برند شما به متخصصان و دانشجویان GIS و هوش مصنوعی.</p>
-    <a class="btn" href="{% url 'core:sponsor' %}">مشاهده سطوح حمایت</a>
+{% if faqs %}
+<section id="faq" class="band"><div class="wrap narrow block">
+  <p class="eyebrow">پرسش‌های متداول</p><h2>پاسخ سؤال‌های رایج</h2>
+  {% for f in faqs %}<details><summary>{{ f.question }}</summary><p>{{ f.answer }}</p></details>{% endfor %}
+</div></section>
+{% endif %}
+
+<section class="wrap block">
+  <div class="cta-band">
+    <h2>{% if S.is_registration %}جای خود را رزرو کنید{% else %}بخشی از اولین روز GIS ارومیه باشید{% endif %}</h2>
+    <p>{% if S.is_registration %}ظرفیت محدود است.{% else %}پیش‌ثبت‌نام رایگان است و به ما کمک می‌کند رویداد بهتری بسازیم.{% endif %}</p>
+    <div class="cta" style="justify-content:center">
+      <a class="btn gold" href="{% url 'core:register' %}">{% if S.is_registration %}ثبت‌نام{% else %}پیش‌ثبت‌نام{% endif %}</a>
+      {% if S.show_sponsors_section %}<a class="btn ghost" style="color:#fff;border-color:#fff" href="{% url 'core:sponsor' %}">حامی رویداد شوید</a>{% endif %}
+    </div>
+    <div class="share">
+      <a id="sh-tg" href="#" rel="noopener">اشتراک در تلگرام</a>
+      <a id="sh-wa" href="#" rel="noopener">واتساپ</a>
+      <button type="button" id="sh-copy">کپی لینک</button>
+    </div>
   </div>
 </section>
-{% endif %}
+
+<script>
+(function(){
+  var el=document.getElementById('count');if(!el)return;
+  var t=new Date(el.dataset.date+'T09:00:00+03:30').getTime();
+  var fa=function(n){return String(n).replace(/\d/g,function(d){return '۰۱۲۳۴۵۶۷۸۹'[d]})};
+  function tick(){var s=Math.max(0,Math.floor((t-Date.now())/1000));
+    document.getElementById('cd').textContent=fa(Math.floor(s/86400));
+    document.getElementById('ch').textContent=fa(Math.floor(s%86400/3600));
+    document.getElementById('cm').textContent=fa(Math.floor(s%3600/60));
+    document.getElementById('cs').textContent=fa(s%60);}
+  tick();setInterval(tick,1000);
+  var u=encodeURIComponent(location.href.split('#')[0]),m=encodeURIComponent(document.title);
+  document.getElementById('sh-tg').href='https://t.me/share/url?url='+u+'&text='+m;
+  document.getElementById('sh-wa').href='https://wa.me/?text='+m+'%20'+u;
+  document.getElementById('sh-copy').onclick=function(){var b=this;navigator.clipboard&&navigator.clipboard.writeText(decodeURIComponent(u)).then(function(){b.textContent='کپی شد ✓'})};
+})();
+</script>
 {% endblock %}

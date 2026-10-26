@@ -8,7 +8,7 @@
     <div class="card"><h3>{{ l.title }}</h3><ul class="bul">{% for b in l.benefit_list %}<li>{{ b }}</li>{% endfor %}</ul></div>
   {% endfor %}</div>
   <h2>درخواست همکاری</h2>
-  <form method="post" class="form">{% csrf_token %}
+  <form method="post" class="form formcard">{% csrf_token %}
     {% include "core/_form.html" %}
     <button class="btn" type="submit">ارسال درخواست</button>
   </form>

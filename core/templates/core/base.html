@@ -4,15 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}{{ S.event_name }} | {{ S.tagline }}{% endblock %}</title>
+<meta name="theme-color" content="#0f4c4a">
+<meta property="og:title" content="{{ S.event_name }} | {{ S.tagline }}">
+<meta property="og:description" content="{{ S.hero_text|truncatechars:160 }}">
+<meta property="og:locale" content="fa_IR">
 <meta name="description" content="{{ S.hero_text|truncatechars:160 }}">
 <link rel="stylesheet" href="{% static 'core/site.css' %}">
 </head>
 <body>
+{% if S.call_open %}<div class="announce">📣 فراخوان ارائه، سخنرانی و کارگاه باز است — مهلت ارسال: <b>{{ S.call_deadline|jdmy }}</b> · <a href="{% url 'core:call' %}">ارسال پیشنهاد</a></div>{% endif %}
 <header class="nav">
   <div class="wrap nav-in">
-    <a href="{% url 'core:home' %}" class="brand">🌍 {{ S.event_name }}</a>
+    <a href="{% url 'core:home' %}" class="brand"><span class="logo-mark"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="1.6"/><path d="M2 12c3-3 5 2 8-1s5-2 8-4" stroke="#e9a62a" stroke-width="1.6" fill="none"/><circle cx="10" cy="10" r="2.2" fill="#e9a62a"/></svg></span>{{ S.event_name }}</a>
     <nav>
       <a href="{% url 'core:home' %}#about">درباره</a>
+      <a href="{% url 'core:home' %}#dates">برنامه</a>
+      <a href="{% url 'core:home' %}#faq">پرسش‌ها</a>
       {% if S.call_open %}<a href="{% url 'core:call' %}">فراخوان</a>{% endif %}
       {% if S.show_sponsors_section %}<a href="{% url 'core:sponsor' %}">حامیان</a>{% endif %}
       <a href="{% url 'core:register' %}" class="btn small">{% if S.is_registration %}ثبت‌نام{% else %}پیش‌ثبت‌نام{% endif %}</a>
@@ -31,5 +38,9 @@
     </p>
   </div>
 </footer>
+<div class="sticky-cta">
+  {% if S.call_open %}<a class="btn ghost" href="{% url 'core:call' %}">ارسال پیشنهاد</a>{% endif %}
+  <a class="btn" href="{% url 'core:register' %}">{% if S.is_registration %}ثبت‌نام{% else %}پیش‌ثبت‌نام{% endif %}</a>
+</div>
 </body>
 </html>

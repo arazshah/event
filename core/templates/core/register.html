@@ -5,7 +5,7 @@
   <h1>{% if S.is_registration %}ثبت‌نام شرکت‌کنندگان{% else %}پیش‌ثبت‌نام شرکت‌کنندگان{% endif %}</h1>
   <p class="muted">{{ S.event_date|jdate }} — {{ S.city }}{% if S.price_text %} — هزینه: <b>{{ S.price_text }}</b>{% endif %}</p>
   {% if not S.is_registration %}<p>پیش‌ثبت‌نام الزام‌آور نیست و به ما کمک می‌کند ظرفیت و برنامه را بهتر تعیین کنیم؛ زمان ثبت‌نام اصلی به شما اطلاع داده می‌شود.</p>{% endif %}
-  <form method="post" class="form">{% csrf_token %}
+  <form method="post" class="form formcard">{% csrf_token %}
     {% include "core/_form.html" %}
     <button class="btn" type="submit">{% if S.is_registration and S.payment_link %}ثبت و ادامه به پرداخت{% elif S.is_registration %}ثبت‌نام{% else %}ثبت پیش‌ثبت‌نام{% endif %}</button>
   </form>

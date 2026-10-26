@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.utils.html import format_html
 
 from . import jalali
-from .models import (Partner, Registration, SiteSettings, SponsorInquiry, SponsorLevel, Submission, TeamMember)
+from .models import (FAQ, ImportantDate, Partner, Registration, SiteSettings, SponsorInquiry, SponsorLevel, Submission, TeamMember)
 
 admin.site.site_header = "پنل مدیریت رویداد روز GIS"
 admin.site.site_title = "مدیریت رویداد"
@@ -83,6 +83,18 @@ class PartnerAdmin(admin.ModelAdmin):
 @admin.register(SponsorLevel)
 class SponsorLevelAdmin(admin.ModelAdmin):
     list_display = ["title", "order", "visible"]
+    list_editable = ["order", "visible"]
+
+
+@admin.register(ImportantDate)
+class ImportantDateAdmin(admin.ModelAdmin):
+    list_display = ["title", "date_text", "order", "highlight", "visible"]
+    list_editable = ["order", "highlight", "visible"]
+
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    list_display = ["question", "order", "visible"]
     list_editable = ["order", "visible"]
 
 

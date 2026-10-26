@@ -3,9 +3,9 @@
 {% block content %}
 <section class="wrap narrow block">
   <h1>فراخوان ارائه، سخنرانی و کارگاه</h1>
-  <p class="muted">محور: {{ S.tagline }} — مهلت ارسال: <b>{{ S.call_deadline|jdate }}</b></p>
+  <p class="muted">محور: {{ S.tagline }} — مهلت ارسال: <b>{{ S.call_deadline|jdmy }}</b></p>
   {% if not S.call_open %}<div class="errors">فراخوان بسته شده است.</div>{% else %}
-  <form method="post" enctype="multipart/form-data" class="form">{% csrf_token %}
+  <form method="post" enctype="multipart/form-data" class="form formcard">{% csrf_token %}
     {% include "core/_form.html" %}
     <button class="btn" type="submit">ارسال پیشنهاد</button>
   </form>{% endif %}

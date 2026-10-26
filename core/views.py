@@ -7,7 +7,7 @@ from django.shortcuts import redirect, render
 from django.utils._os import safe_join
 
 from .forms import RegistrationForm, SponsorInquiryForm, SubmissionForm
-from .models import Partner, SiteSettings, SponsorLevel, Submission, TeamMember
+from .models import FAQ, ImportantDate, Partner, SiteSettings, SponsorLevel, Submission, TeamMember
 
 PARTNER_GROUPS = [("host", "میزبان"), ("co", "همکاران برگزاری"), ("gold", "اسپانسر طلایی"),
                   ("silver", "اسپانسر نقره‌ای"), ("media", "حامیان رسانه‌ای")]
@@ -38,6 +38,8 @@ def home(request):
         "organizers": [m for m in team if m.group == "organizer"],
         "scientific": [m for m in team if m.group == "scientific"],
         "levels": SponsorLevel.objects.filter(visible=True),
+        "dates": ImportantDate.objects.filter(visible=True),
+        "faqs": FAQ.objects.filter(visible=True),
     })
 
 

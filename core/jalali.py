@@ -49,3 +49,8 @@ class JalaliDateField(forms.DateField):
             return jdatetime.date(y, m, d).togregorian()
         except (ValueError, TypeError):
             raise forms.ValidationError("تاریخ شمسی را به شکل ۱۴۰۵/۰۸/۲۸ وارد کنید.")
+
+
+def format_dmy(d):
+    j = to_jalali(d)
+    return f"{fa_digits(j.day)} {MONTHS[j.month - 1]} {fa_digits(j.year)}"

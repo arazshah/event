@@ -18,3 +18,13 @@ def jdate(value):
 @register.filter
 def jshort(value):
     return jalali.format_short(value) if value else ""
+
+
+@register.filter
+def iso(value):
+    return value.isoformat() if value else ""
+
+
+@register.filter
+def jdmy(value):
+    return jalali.format_dmy(value) if value else ""
