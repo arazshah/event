@@ -4,3 +4,4 @@ data/
 staticfiles/
 .env
 *.sqlite3
+promo/src/music.wav
