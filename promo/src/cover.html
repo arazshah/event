@@ -1,0 +1,36 @@
+<!doctype html><html lang="fa"><head><meta charset="utf-8"><link rel="stylesheet" href="common.css">
+<style>
+html,body{width:1920px;height:1080px}
+.wrap{position:absolute;inset:0;padding:70px 100px;display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center}
+.txt{display:flex;flex-direction:column;gap:22px;align-items:flex-start}
+h1{font-size:112px;font-weight:900;line-height:1.25}
+.tag{font-size:46px;font-weight:800;white-space:nowrap}
+.row{display:flex;gap:16px;flex-wrap:wrap}
+.pill{font-size:32px;padding:4px 26px}
+.chips{display:flex;gap:14px;flex-wrap:wrap}.chips .chip{font-size:28px;padding:8px 20px 8px 22px;border-radius:99px;gap:14px}.chips .ic{width:44px;height:44px;border-radius:50%}.chips svg{width:26px;height:26px}
+.url{direction:ltr;font-size:44px;font-weight:800;color:var(--pri)}
+.right{position:relative}
+.card{transform:rotate(-2deg)}.code{font-size:24px;padding:22px 30px}
+.badge{z-index:3;position:absolute;top:-34px;left:20px;background:var(--ac);color:#3a2800;font-weight:900;font-size:36px;padding:10px 34px;border-radius:99px;box-shadow:0 14px 30px -12px #12353f88;transform:rotate(-4deg)}
+</style></head><body>
+<div class="bg"></div>
+<div class="wrap">
+ <div class="txt">
+  <div class="logo" style="font-size:40px"><i id="lg"></i>postgis.ir · رویداد</div>
+  <h1>روز جهانی GIS<br>ارومیه</h1>
+  <div class="tag"><mark>GeoAI | هوش مصنوعی در علوم مکانی</mark></div>
+  <div class="row"><span class="pill"><b></b>پنجشنبه ۲۸ آبان ۱۴۰۵</span><span class="pill"><b></b>ارومیه · حضوری + آنلاین</span></div>
+  <div class="chips" id="chips"></div>
+  <div class="url">event.postgis.ir</div>
+ </div>
+ <div class="right"><div class="badge">فراخوان باز است</div>
+  <div class="card"><div id="map"></div><div class="code" id="code"></div></div></div>
+</div>
+<script src="common.js"></script>
+<script>
+document.getElementById('lg').innerHTML=IC.mark;
+document.getElementById('map').innerHTML=mapSVG(1,960,420);
+document.getElementById('map').firstChild.setAttribute('width','100%');document.getElementById('map').firstChild.setAttribute('height',420);document.getElementById('map').firstChild.setAttribute('preserveAspectRatio','xMidYMid slice');
+document.getElementById('code').innerHTML=CODE;
+document.getElementById('chips').innerHTML=CHIPS.map(c=>`<div class="chip"><span class="ic">${IC[c[0]]}</span>${c[1]}</div>`).join('');
+</script></body></html>
