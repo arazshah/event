@@ -3,23 +3,23 @@
 html,body{width:1080px;height:1350px}
 .wrap{position:absolute;inset:0;display:flex;flex-direction:column}
 /* organisers */
-.orgs{background:#fff;border-bottom:5px solid var(--ac);padding:20px 40px 16px;text-align:center;position:relative;z-index:2;box-shadow:0 10px 30px -18px #12353f80}
+.orgs{background:#fff;margin:16px 22px 0;border-radius:26px;border-bottom:5px solid var(--ac);padding:12px 30px 10px;text-align:center;position:relative;z-index:2;box-shadow:0 10px 30px -18px #12353f80}
 .logos{display:flex;align-items:center;justify-content:center;gap:34px}
 .logos img{display:block;object-fit:contain}
 .sep{width:2px;height:84px;background:var(--line)}
 .with{display:flex;align-items:center;gap:12px;font-size:19px;font-weight:800;color:var(--mut)}
-.statement{margin-top:12px;font-size:21px;font-weight:700;color:var(--tx);line-height:1.6}
+.statement{margin-top:4px;font-size:19px;font-weight:700;color:var(--tx);line-height:1.6}
 .statement b{color:var(--pri);font-weight:900}
 .statement .v{background:var(--acsoft);padding:0 10px;border-radius:8px;font-weight:900}
-.main{flex:1;padding:22px 52px 0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;position:relative}
+.main{flex:1;padding:14px 46px 0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;position:relative}
 .kicker{display:inline-flex;gap:10px;align-items:center;background:var(--pri);color:#fff;font-weight:800;font-size:22px;padding:5px 24px;border-radius:99px}
 .kicker i{width:11px;height:11px;border-radius:50%;background:var(--ac)}
 .kicker span{direction:ltr;color:var(--ac)}
-h1{font-size:100px;font-weight:900;line-height:1.1;letter-spacing:-1px}
+h1{font-size:94px;font-weight:900;line-height:1.1;letter-spacing:-1px}
 h1 em{font-style:normal;color:var(--pri)}
 .wave{margin:-4px 0 -6px}
-.axis{font-size:44px;font-weight:900}
-.sub{font-size:27px;font-weight:700;color:var(--mut)}
+.axis{font-size:40px;font-weight:900}
+.sub{font-size:24px;font-weight:700;color:var(--mut)}
 /* date block */
 .when{display:flex;gap:18px;align-items:stretch;margin-top:6px}
 .cal{width:150px;border-radius:24px;overflow:hidden;background:#fff;border:2px solid var(--pri);box-shadow:0 16px 30px -18px #0f4c4aaa;flex:none}
@@ -31,11 +31,11 @@ h1 em{font-style:normal;color:var(--pri)}
 .facts small{font-weight:600;color:var(--mut);font-size:21px}
 /* speakers */
 .speakers{width:100%;margin-top:8px}
-.sp-title{display:flex;align-items:center;gap:16px;font-size:28px;font-weight:900;margin-bottom:12px}
+.sp-title{display:flex;align-items:center;gap:16px;font-size:26px;font-weight:900;margin-bottom:10px}
 .sp-title:before,.sp-title:after{content:"";flex:1;height:2px;background:var(--line)}
 .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
 .sp{background:#fff;border:2px solid var(--line);border-radius:22px;padding:14px 8px 12px;display:flex;flex-direction:column;align-items:center;gap:6px}
-.ph{width:118px;height:118px;border-radius:50%;border:5px solid var(--ac);overflow:hidden;background:var(--bg2);display:grid;place-items:center;font-size:68px;font-weight:900;color:var(--pri)}
+.ph{width:100px;height:100px;border-radius:50%;border:5px solid var(--ac);overflow:hidden;background:var(--bg2);display:grid;place-items:center;font-size:62px;font-weight:900;color:var(--pri)}
 .ph img{width:100%;height:100%;object-fit:cover}
 .sp.ghost .ph{border-style:dashed;border-color:#9db8a6;color:#9db8a6}
 .sp .nm{font-size:21px;font-weight:900;line-height:1.3}
@@ -54,24 +54,48 @@ h1 em{font-style:normal;color:var(--pri)}
 .reg{text-align:center}
 .reg small{display:block;font-size:20px;font-weight:700;color:#cfe3de;margin-bottom:6px}
 .reg .u{direction:ltr;background:var(--ac);color:#3a2800;font-size:40px;font-weight:900;padding:8px 28px;border-radius:18px}
+
+.rs{position:absolute;inset:0;background:url(../assets/bg-rs.jpg) center top/cover}
+.wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(246,244,232,.08) 0%,rgba(246,244,232,.10) 55%,rgba(246,244,232,.88) 63%,rgba(246,244,232,.97) 70%),radial-gradient(60% 30% at 50% 36%,rgba(246,244,232,.35),transparent)}
+.grat{position:absolute;inset:0}
+.lab{position:absolute;direction:ltr;font:600 14px ui-monospace,Menlo,Consolas,monospace;color:#fff;background:#12353fb3;padding:1px 7px;border-radius:5px}
+.tag2{position:absolute;top:770px;font-size:17px;font-weight:800;color:#fff;background:#12353fcc;padding:4px 14px;border-radius:99px;backdrop-filter:blur(4px)}
+.tag2.l{left:24px;top:574px}.tag2.r{right:24px;top:574px}
+.tag2.r{background:#0f4c4acc}
+.bb{position:absolute;border:3px solid #ffd166;border-radius:6px;box-shadow:0 0 0 1px #12353f88,inset 0 0 0 1px #12353f55}
+.bb span{position:absolute;top:-30px;right:-3px;background:#ffd166;color:#12353f;font-size:16px;font-weight:900;padding:1px 10px;border-radius:5px 5px 0 0;white-space:nowrap}
+.legend{position:absolute;left:30px;top:620px;background:#fffffff0;border-radius:14px;padding:8px 12px;font-size:14px;font-weight:700;display:grid;grid-template-columns:14px auto;gap:4px 8px;align-items:center;box-shadow:0 10px 24px -14px #12353f99}
+.legend b{grid-column:1/3;font-size:15px;color:var(--pri)}
+.legend i{width:14px;height:14px;border-radius:4px;display:block}
+.glass{background:rgba(250,248,238,.82);backdrop-filter:blur(10px);border:1.5px solid #ffffffcc;border-radius:30px;padding:14px 34px 12px;box-shadow:0 24px 50px -26px #12353f99;display:flex;flex-direction:column;align-items:center;gap:6px}
+.feats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%}
+.feats div{background:#fff;border:2px solid var(--line);border-radius:16px;padding:8px 10px;font-size:19px;font-weight:900;line-height:1.3;display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;box-shadow:0 10px 20px -16px #12353f88}
+.feats svg{width:28px;height:28px;flex:none}
 </style></head><body>
-<div class="bg"></div>
+<div class="rs"></div><div class="wash"></div>
+<svg class="grat" width="1080" height="1350"><g stroke="#fff" stroke-opacity=".45" stroke-width="1" stroke-dasharray="4 6"><path d="M0 330H1080M0 560H1080M0 790H1080M270 0V900M540 0V900M810 0V900"/></g></svg>
+<div class="lab" style="top:334px;left:8px">37°40′N</div>
+<div class="lab" style="top:334px;right:8px">45°04′E</div>
+<div class="tag2 l">GeoAI · طبقه‌بندی پوشش زمین</div><div class="tag2 r">تصویر ماهواره‌ای Sentinel-2</div>
+
+<div class="bb" style="left:906px;top:640px;width:140px;height:120px"><span>آب ۰٫۹۹</span></div>
+<div class="legend"><b>طبقه‌بندی</b><i style="background:#2b7a9a"></i>آب<i style="background:#e9c46a"></i>کشاورزی<i style="background:#6a994e"></i>پوشش گیاهی<i style="background:#c0504d"></i>شهری<i style="background:#7f5539"></i>کوهستان</div>
 <div class="wrap">
  <div class="orgs">
   <div class="logos">
-   <img src="../assets/logo-urmia-university-trim.png" style="height:96px">
-   <img src="../assets/logo-pajooheshkadeh-trim.png" style="height:92px">
+   <img src="../assets/logo-urmia-university-trim.png" style="height:104px">
+   <img src="../assets/logo-pajooheshkadeh-trim.png" style="height:98px">
    <div class="sep"></div>
-   <div class="with">با همکاری<img src="../assets/logo-zhasco-trim.png" style="height:88px"></div>
+   <div class="with">با همکاری<img src="../assets/logo-zhasco-trim.png" style="height:96px"></div>
   </div>
   <div class="statement"><b>دانشگاه ارومیه</b> و <b>پژوهشکده مدیریت خطرپذیری، بحران و مهندسی زیرساخت‌ها</b><br>با همکاری <b>شرکت ژرف آذران صدر</b> <span class="v">برگزار می‌کنند</span></div>
  </div>
  <div class="main">
-  <div class="kicker"><i></i>نخستین دوره · هم‌زمان با روز جهانی GIS · <span>18 Nov 2026</span></div>
+  <div class="glass"><div class="kicker"><i></i>نخستین دوره · هم‌زمان با روز جهانی GIS · <span>18 Nov 2026</span></div>
   <h1>روز جهانی <em>GIS</em> ارومیه</h1>
   <div class="wave" id="wave"></div>
   <div class="axis"><mark>GeoAI | هوش مصنوعی در علوم مکانی</mark></div>
-  <div class="sub">از لرزه‌نگاشت تا نقشه؛ از داده مکانی تا مدیریت هوشمند خطر و بحران</div>
+  <div class="sub">از لرزه‌نگاشت تا نقشه؛ از داده مکانی تا مدیریت هوشمند خطر و بحران</div></div>
   <div class="when">
    <div class="facts">
     <div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0f4c4a" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>صبح تا ظهر</div>
@@ -79,6 +103,12 @@ h1 em{font-style:normal;color:var(--pri)}
     <div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0f4c4a" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg>حضوری <small>+ پخش آنلاین</small></div>
    </div>
    <div class="cal"><div class="h">چهارشنبه</div><div class="d">۲۷</div><div class="m">آبان ۱۴۰۵</div></div>
+  </div>
+  <div class="feats">
+   <div><svg viewBox="0 0 24 24" fill="none" stroke="#0f4c4a" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="7" r="3"/><circle cx="18" cy="7" r="3"/><circle cx="12" cy="17" r="3"/><path d="M8.5 8.8l2 5.7M15.5 8.8l-2 5.7M9 7h6"/></svg>شبکه‌سازی با متخصصان</div>
+   <div><svg viewBox="0 0 24 24" fill="none" stroke="#0f4c4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M9 13l2 2M14 4c3-1 6-1 6-1s0 3-1 6l-6 7-5-5z"/><circle cx="15" cy="9" r="1.5"/></svg>رونمایی محصولات هوشمند</div>
+   <div><svg viewBox="0 0 24 24" fill="none" stroke="#0f4c4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V10l5 3V10l5 3V6l8 4v11z"/><path d="M7 17h2M12 17h2M17 17h1"/></svg>پیوند با بازار و صنعت</div>
+   <div><svg viewBox="0 0 24 24" fill="none" stroke="#0f4c4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>آمادگی برای بازار کار</div>
   </div>
   <div class="speakers">
    <div class="sp-title">سخنرانان</div>
