@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.utils.html import format_html
 
 from . import jalali
-from .models import (FAQ, ImportantDate, Partner, Registration, SiteSettings, SponsorInquiry, SponsorLevel, Submission, TeamMember)
+from .models import (FAQ, ImportantDate, Partner, ScheduleItem, Registration, SiteSettings, SponsorInquiry, SponsorLevel, Submission, TeamMember)
 
 admin.site.site_header = "پنل مدیریت رویداد روز GIS"
 admin.site.site_title = "مدیریت رویداد"
@@ -47,6 +47,7 @@ def _file_link(f):
 class SiteSettingsAdmin(JalaliDatesMixin, admin.ModelAdmin):
     fieldsets = [
         ("اطلاعات اصلی", {"fields": ["event_name", "tagline", "hero_text", "tracks_text"]}),
+        ("رصدخانه و اطلس", {"fields": ["observatory_title", "observatory_text", "atlas_url"]}),
         ("زمان و مکان", {"fields": ["event_date", "time_text", "city", "venue_text", "venue_url", "format_text"]}),
         ("فراخوان", {"fields": ["call_open", "call_deadline"]}),
         ("متن‌های تبلیغی", {"fields": ["networking_text", "unveil_text", "show_sponsors_section"]}),
@@ -92,6 +93,12 @@ class ImportantDateAdmin(admin.ModelAdmin):
     list_editable = ["order", "highlight", "visible"]
 
 
+@admin.register(ScheduleItem)
+class ScheduleItemAdmin(admin.ModelAdmin):
+    list_display = ["time_text", "title", "order", "visible"]
+    list_editable = ["order", "visible"]
+
+
 @admin.register(FAQ)
 class FAQAdmin(admin.ModelAdmin):
     list_display = ["question", "order", "visible"]
@@ -100,8 +107,8 @@ class FAQAdmin(admin.ModelAdmin):
 
 @admin.register(Submission)
 class SubmissionAdmin(admin.ModelAdmin):
-    list_display = ["full_name", "kind", "mode", "title", "affiliation", "status", "when", "cv", "slides"]
-    list_filter = ["kind", "mode", "status", "track"]
+    list_display = ["full_name", "kind", "title", "affiliation", "status", "when", "cv", "slides"]
+    list_filter = ["kind", "status", "track"]
     list_editable = ["status"]
     search_fields = ["full_name", "email", "title", "affiliation"]
     readonly_fields = ["created_at", "cv", "slides"]
@@ -122,8 +129,8 @@ class SubmissionAdmin(admin.ModelAdmin):
 
 @admin.register(Registration)
 class RegistrationAdmin(admin.ModelAdmin):
-    list_display = ["full_name", "phone", "email", "role", "organization", "attend", "is_final", "paid", "when"]
-    list_filter = ["is_final", "paid", "role", "attend"]
+    list_display = ["full_name", "phone", "email", "role", "organization", "position", "is_final", "paid", "when"]
+    list_filter = ["is_final", "paid", "role"]
     list_editable = ["paid"]
     search_fields = ["full_name", "email", "phone", "organization"]
     readonly_fields = ["created_at", "is_final"]

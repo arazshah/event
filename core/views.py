@@ -7,10 +7,10 @@ from django.shortcuts import redirect, render
 from django.utils._os import safe_join
 
 from .forms import RegistrationForm, SponsorInquiryForm, SubmissionForm
-from .models import FAQ, ImportantDate, Partner, SiteSettings, SponsorLevel, Submission, TeamMember
+from .models import FAQ, ImportantDate, Partner, ScheduleItem, SiteSettings, SponsorLevel, Submission, TeamMember
 
-PARTNER_GROUPS = [("host", "میزبان"), ("co", "همکاران برگزاری"), ("gold", "اسپانسر طلایی"),
-                  ("silver", "اسپانسر نقره‌ای"), ("media", "حامیان رسانه‌ای")]
+PARTNER_GROUPS = [("main", "حامیان اصلی"), ("special", "حامیان تخصصی"), ("media", "حامیان رسانه‌ای"), ("co", "همکاران")]
+TEAM_GROUPS = [("scientific", "کمیته علمی"), ("executive", "کمیته اجرایی"), ("secretariat", "دبیرخانه")]
 
 
 def _throttled(request, key, limit=8, window=3600):
@@ -30,22 +30,22 @@ def healthz(request):
 def home(request):
     partners = Partner.objects.filter(visible=True)
     groups = [(title, [p for p in partners if p.kind == k]) for k, title in PARTNER_GROUPS]
-    groups = [(t, ps) for t, ps in groups if ps]
     team = TeamMember.objects.filter(visible=True)
+    team_groups = [(title, [m for m in team if m.group == k]) for k, title in TEAM_GROUPS]
     return render(request, "core/home.html", {
-        "kinds": Submission.KINDS,
-        "partner_groups": groups,
-        "organizers": [m for m in team if m.group == "organizer"],
-        "scientific": [m for m in team if m.group == "scientific"],
+        "kinds": [k for k in Submission.KINDS if k[0] != Submission.KIND_ONLINE],
+        "partner_groups": [(t, ps) for t, ps in groups if ps],
+        "team_groups": [(t, ms) for t, ms in team_groups if ms],
         "levels": SponsorLevel.objects.filter(visible=True),
         "dates": ImportantDate.objects.filter(visible=True),
+        "schedule": ScheduleItem.objects.filter(visible=True),
         "faqs": FAQ.objects.filter(visible=True),
     })
 
 
 def call(request):
     s = SiteSettings.load()
-    initial = {"kind": request.GET.get("type", Submission.KIND_SPEAKER), "mode": "inperson"}
+    initial = {"kind": request.GET.get("type", Submission.KIND_SPEAKER)}
     if request.method == "POST":
         form = SubmissionForm(request.POST, request.FILES, tracks=s.track_list)
         if not s.call_open:

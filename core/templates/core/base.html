@@ -4,42 +4,55 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}{{ S.event_name }} | {{ S.tagline }}{% endblock %}</title>
+<meta name="description" content="{{ S.hero_text|truncatechars:160 }}">
 <meta name="theme-color" content="#0f4c4a">
 <meta property="og:title" content="{{ S.event_name }} | {{ S.tagline }}">
 <meta property="og:description" content="{{ S.hero_text|truncatechars:160 }}">
 <meta property="og:locale" content="fa_IR">
-<meta name="description" content="{{ S.hero_text|truncatechars:160 }}">
 <link rel="stylesheet" href="{% static 'core/site.css' %}">
 </head>
 <body>
-{% if S.call_open %}<div class="announce">📣 فراخوان ارائه، سخنرانی و کارگاه باز است — مهلت ارسال: <b>{{ S.call_deadline|jdmy }}</b> · <a href="{% url 'core:call' %}">ارسال پیشنهاد</a></div>{% endif %}
-<header class="nav">
-  <div class="wrap nav-in">
-    <a href="{% url 'core:home' %}" class="brand"><span class="logo-mark"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#fff" stroke-width="1.6"/><path d="M2 12c3-3 5 2 8-1s5-2 8-4" stroke="#e9a62a" stroke-width="1.6" fill="none"/><circle cx="10" cy="10" r="2.2" fill="#e9a62a"/></svg></span>{{ S.event_name }}</a>
-    <nav>
-      <a href="{% url 'core:home' %}#about">درباره</a>
-      <a href="{% url 'core:home' %}#dates">برنامه</a>
-      <a href="{% url 'core:home' %}#faq">پرسش‌ها</a>
-      {% if S.call_open %}<a href="{% url 'core:call' %}">فراخوان</a>{% endif %}
-      {% if S.show_sponsors_section %}<a href="{% url 'core:sponsor' %}">حامیان</a>{% endif %}
-      <a href="{% url 'core:register' %}" class="btn small">{% if S.is_registration %}ثبت‌نام{% else %}پیش‌ثبت‌نام{% endif %}</a>
-    </nav>
+{% if S.call_open %}<div class="announce">📣 فراخوان ارائه‌ی تجربه و پروژه‌ی شاخص باز است — مهلت ارسال: <b>{{ S.call_deadline|jdmy }}</b> · <a href="{% url 'core:call' %}">ثبت پیشنهاد</a></div>{% endif %}
+<header class="top">
+  <div class="wrap top-in">
+    <a href="{% url 'core:home' %}" class="orgs" aria-label="{{ S.event_name }}">
+      <img src="{% static 'core/img/logo-urmia-university.png' %}" alt="دانشگاه ارومیه" height="56">
+      <span class="sep"></span>
+      <img src="{% static 'core/img/logo-pajooheshkadeh.png' %}" alt="پژوهشکده مدیریت خطرپذیری، بحران و مهندسی زیرساخت‌ها" height="52">
+    </a>
+    <p class="orgs-text">دانشگاه ارومیه و پژوهشکده مدیریت خطرپذیری، بحران و مهندسی زیرساخت‌ها <b>برگزار می‌کنند</b></p>
   </div>
 </header>
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a href="{% url 'core:home' %}#about">درباره نشست</a>
+    <a href="{% url 'core:home' %}#observatory">رصدخانه</a>
+    <a href="{% url 'core:home' %}#program">برنامه</a>
+    <a href="{% url 'core:home' %}#tracks">محورها</a>
+    {% if S.call_open %}<a href="{% url 'core:call' %}">فراخوان</a>{% endif %}
+    {% if S.show_sponsors_section %}<a href="{% url 'core:sponsor' %}">حامیان</a>{% endif %}
+    <a href="{% url 'core:register' %}" class="btn small">{% if S.is_registration %}ثبت‌نام{% else %}پیش‌ثبت‌نام{% endif %}</a>
+  </div>
+</nav>
 <main>{% block content %}{% endblock %}</main>
 <footer>
   <div class="wrap">
-    <p>{{ S.event_name }} — {{ S.city }}، {{ S.event_date|jdate }}</p>
+    <div class="foot-logos">
+      <div><small>حامی اجرایی</small><span class="plate"><img src="{% static 'core/img/logo-zhasco.png' %}" alt="مهندسین مشاور ژرف آذران صدر" height="58"></span></div>
+      <div><small>حامی فناوری مکانی</small><a class="plate postgis" href="https://postgis.ir" rel="noopener"><img src="{% static 'core/img/logo-postgis.png' %}" alt="postgis.ir" height="52"><span><b>پایگاه داده مکانی ابری</b><em>postgis.ir</em></span></a></div>
+    </div>
+    <p>{{ S.event_name }} · {{ S.event_date|jdate }} · {{ S.venue_text }}</p>
     <p class="links">
       {% if S.contact_email %}<a href="mailto:{{ S.contact_email }}">{{ S.contact_email }}</a>{% endif %}
       {% if S.contact_phone %}<span dir="ltr">{{ S.contact_phone }}</span>{% endif %}
       {% if S.telegram_url %}<a href="{{ S.telegram_url }}" rel="noopener">تلگرام</a>{% endif %}
       {% if S.instagram_url %}<a href="{{ S.instagram_url }}" rel="noopener">اینستاگرام</a>{% endif %}
+      {% if S.atlas_url %}<a href="{{ S.atlas_url }}" rel="noopener">اطلس مخاطرات استان</a>{% endif %}
     </p>
   </div>
 </footer>
 <div class="sticky-cta">
-  {% if S.call_open %}<a class="btn ghost" href="{% url 'core:call' %}">ارسال پیشنهاد</a>{% endif %}
+  {% if S.call_open %}<a class="btn ghost" href="{% url 'core:call' %}">ثبت پیشنهاد</a>{% endif %}
   <a class="btn" href="{% url 'core:register' %}">{% if S.is_registration %}ثبت‌نام{% else %}پیش‌ثبت‌نام{% endif %}</a>
 </div>
 </body>

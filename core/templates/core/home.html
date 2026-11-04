@@ -1,135 +1,199 @@
-{% extends "core/base.html" %}{% load core_extras %}
+{% extends "core/base.html" %}{% load static core_extras %}
 {% block content %}
 <section class="hero">
   <div class="wrap hero-grid">
-    <div>
-      <span class="pill"><i></i>{{ S.city }} · {{ S.event_date|jdate }}</span>
-      <h1>{{ S.event_name }}<br><mark>{{ S.tagline }}</mark></h1>
+    <div class="art" aria-hidden="true">
+      <div class="globe"><div class="sphere"></div><img class="net" src="{% static 'core/img/globe-net.svg' %}" alt=""></div>
+      <div class="layers"><i style="background-image:linear-gradient(#fff9,#fff9),url({% static 'core/img/crop-classified.jpg' %});top:96px"></i><i style="background-image:url({% static 'core/img/crop-classified.jpg' %});top:48px"></i><i style="background-image:radial-gradient(circle at 30% 40%,#d7302799,transparent 35%),radial-gradient(circle at 70% 60%,#fdae6199,transparent 40%),url({% static 'core/img/crop-natural.jpg' %});top:0"></i></div>
+    </div>
+    <div class="head">
+      <span class="kicker">نخستین دوره · به مناسبت روز جهانی GIS</span>
+      <h1>روز جهانی <em>GIS</em> ارومیه</h1>
+      <div class="seis" id="seis" aria-hidden="true"></div>
+      <p class="axis"><mark>{{ S.tagline }}</mark></p>
+      <p class="formal">نشست تخصصی مدیران دستگاه‌های اجرایی، اساتید و کارشناسان</p>
       <p class="lead">{{ S.hero_text }}</p>
       <div class="cta">
-        {% if S.call_open %}<a class="btn" href="{% url 'core:call' %}">ارسال پیشنهاد سخنرانی / ارائه / کارگاه</a>{% endif %}
-        <a class="btn ghost" href="{% url 'core:register' %}">{% if S.is_registration %}ثبت‌نام شرکت‌کنندگان{% else %}پیش‌ثبت‌نام (رایگان){% endif %}</a>
+        <a class="btn" href="{% url 'core:register' %}">{% if S.is_registration %}ثبت‌نام در نشست{% else %}پیش‌ثبت‌نام در نشست{% endif %}</a>
+        {% if S.call_open %}<a class="btn ghost" href="{% url 'core:call' %}">ثبت پیشنهاد ارائه</a>{% endif %}
       </div>
-      <ul class="checks"><li>حضوری + پخش آنلاین</li><li>ویژه دانشجویان و متخصصان</li><li>رونمایی از محصولات هوشمند</li></ul>
-    </div>
-    <div class="ticket" aria-label="شمارش معکوس">
-      <div class="ticket-top">تا شروع رویداد <span>{{ S.event_date|jshort }}</span></div>
-      <div class="count" id="count" data-date="{{ S.event_date|iso }}"><div><b id="cd">–</b><small>روز</small></div><div><b id="ch">–</b><small>ساعت</small></div><div><b id="cm">–</b><small>دقیقه</small></div><div><b id="cs">–</b><small>ثانیه</small></div></div>
-      <div class="code"><span class="k">SELECT</span> * <span class="k">FROM</span> gis_day
-<span class="k">WHERE</span> city = <span class="s">'Urmia'</span>
-  <span class="k">AND</span> topic = <span class="s">'GeoAI'</span>
-  <span class="k">AND</span> date = <span class="s">'{{ S.event_date|iso }}'</span>;</div>
-      <div class="ticket-foot">نتیجه <span>۱ رویداد · ۴ حالت مشارکت</span></div>
     </div>
   </div>
 </section>
 
-<section class="wrap">
-  <ul class="facts">
-    <li><span>📅 تاریخ</span><b>{{ S.event_date|jdate }}</b></li>
-    <li><span>🕒 ساعت</span><b>{{ S.time_text|default:"—" }}</b></li>
-    <li><span>📍 مکان</span><b>{{ S.city }}{% if S.venue_text %} — {% if S.venue_url %}<a href="{{ S.venue_url }}">{{ S.venue_text }}</a>{% else %}{{ S.venue_text }}{% endif %}{% endif %}</b></li>
-    <li><span>🎥 برگزاری</span><b>{{ S.format_text|default:"—" }}</b></li>
+<section class="wrap info">
+  <div class="panel">
+    <div class="fact"><span>تاریخ</span><b>{{ S.event_date|jdate }}</b></div>
+    <div class="fact"><span>ساعت</span><b>{{ S.time_text|default:"—" }}</b></div>
+    <div class="fact"><span>مکان</span><b>{% if S.venue_url %}<a href="{{ S.venue_url }}">{{ S.venue_text }}</a>{% else %}{{ S.venue_text|default:"—" }}{% endif %}</b></div>
+    <div class="count" id="count" data-date="{{ S.event_date|iso }}"><div><b id="cd">–</b><small>روز</small></div><div><b id="ch">–</b><small>ساعت</small></div><div><b id="cm">–</b><small>دقیقه</small></div></div>
+  </div>
+  <ul class="pills">
+    <li>شبکه‌سازی با متخصصان</li><li>رونمایی محصولات هوشمند</li><li>پیوند با بازار و صنعت</li><li>چالش‌های بخش دولتی و خصوصی</li>
   </ul>
 </section>
 
 <section id="about" class="wrap block">
-  <p class="eyebrow">چرا شرکت کنیم؟</p>
-  <h2>یک روز، تمام نقشه‌ی GeoAI</h2>
-  <div class="grid3">
-    <div class="card"><div class="ic">🤝</div><h3>شبکه‌سازی با متخصصان</h3><p>{{ S.networking_text }}</p></div>
-    <div class="card"><div class="ic">🚀</div><h3>رونمایی محصولات هوشمند</h3><p>{{ S.unveil_text }}</p></div>
-    <div class="card"><div class="ic">🎓</div><h3>ویژه دانشجویان</h3><p>تازه‌ترین خبرها و مباحث تخصصی هوش مصنوعی در علوم مکانی، همراه با ارائه‌های کوتاه دانشجویی.</p></div>
-    <div class="card"><div class="ic">🛠</div><h3>کارگاه‌های عملی</h3><p>یاد بگیرید و همان‌جا تمرین کنید؛ از داده مکانی تا مدل هوشمند.</p></div>
-    <div class="card"><div class="ic">🎤</div><h3>سخنرانان متخصص</h3><p>تجربه‌ی واقعی پژوهشگران و فعالان صنعت GIS و هوش مصنوعی.</p></div>
-    <div class="card"><div class="ic">🌐</div><h3>حضور از هر جا</h3><p>پخش آنلاین برای علاقه‌مندان شهرهای دیگر و ارائه‌ی آنلاین از خارج از کشور.</p></div>
+  <p class="eyebrow">درباره نشست</p>
+  <h2>هم‌اندیشی دانشگاه و دستگاه‌های اجرایی پیرامون داده‌ی مکانی</h2>
+  <p class="prose">نشست روز جهانی GIS ارومیه با هدف تبیین نقش داده‌های مکانی و هوش مصنوعی در برنامه‌ریزی توسعه و مدیریت خطر استان، به‌صورت نشستی علمی‌کاربردی و یک‌روزه، با مشارکت دانشگاه، دستگاه‌های اجرایی و بخش فناور برگزار می‌شود.</p>
+  <div class="grid4">
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="6" cy="7" r="3"/><circle cx="18" cy="7" r="3"/><circle cx="12" cy="17" r="3"/><path d="M8.5 8.8l2 5.7M15.5 8.8l-2 5.7M9 7h6"/></svg></div><h3>هم‌اندیشی و شبکه‌سازی</h3><p>{{ S.networking_text }}</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21V10l5 3V10l5 3V6l8 4v11z"/><path d="M7 17h2M12 17h2M17 17h1"/></svg></div><h3>بررسی چالش‌ها</h3><p>گفت‌وگوی مدیران و کارشناسان بخش دولتی و خصوصی پیرامون چالش‌های مدیریت و تبادل داده‌ی مکانی.</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M9 13l2 2M14 4c3-1 6-1 6-1s0 3-1 6l-6 7-5-5z"/><circle cx="15" cy="9" r="1.5"/></svg></div><h3>معرفی دستاوردها</h3><p>{{ S.unveil_text }}</p></div>
+    <div class="card"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></div><h3>پیوند با بازار و صنعت</h3><p>ارتباط مستقیم پژوهشگران و دانشجویان با شرکت‌های دانش‌بنیان و بخش خصوصی حوزه‌ی اطلاعات مکانی.</p></div>
   </div>
-  {% if S.track_list %}<h3 class="sub">زیرمحورهای رویداد</h3>
-  <ul class="tracks">{% for t in S.track_list %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
-  <ul class="audience"><li>دانشجویان GIS و عمران</li><li>پژوهشگران سنجش‌ازدور</li><li>توسعه‌دهندگان و تحلیلگران داده</li><li>مدیران و کارشناسان شهری</li><li>استارتاپ‌ها و شرکت‌های فناور</li></ul>
+  <h3 class="sub">مخاطبان نشست</h3>
+  <ul class="tracks"><li>مدیران و کارشناسان دستگاه‌های اجرایی</li><li>اعضای هیئت علمی و پژوهشگران</li><li>دانشجویان تحصیلات تکمیلی</li><li>شرکت‌های دانش‌بنیان و بخش خصوصی</li></ul>
 </section>
 
-{% if S.call_open %}
-<section id="call" class="band">
+<section id="observatory" class="band">
   <div class="wrap block">
-    <p class="eyebrow">فراخوان</p>
-    <h2>تجربه‌تان را به اشتراک بگذارید</h2>
-    <p class="muted">مهلت ارسال پیشنهاد: <b>{{ S.call_deadline|jdmy }}</b></p>
-    <div class="grid4">
-      <a class="card link" href="{% url 'core:call' %}?type=speaker"><div class="ic">🎤</div><h3>سخنران</h3><p>سخنرانی تخصصی و تجربه‌محور درباره GeoAI.</p><span class="go">ارسال پیشنهاد ←</span></a>
-      <a class="card link" href="{% url 'core:call' %}?type=presentation"><div class="ic">📊</div><h3>ارائه</h3><p>ارائه پژوهشی: پروژه، مقاله یا پایان‌نامه (۵ یا ۲۰ دقیقه).</p><span class="go">ارسال پیشنهاد ←</span></a>
-      <a class="card link" href="{% url 'core:call' %}?type=workshop"><div class="ic">🛠</div><h3>کارگاه</h3><p>کارگاه عملی ۶۰ تا ۹۰ دقیقه‌ای.</p><span class="go">ارسال پیشنهاد ←</span></a>
-      <a class="card link" href="{% url 'core:call' %}?type=online_abroad"><div class="ic">🌐</div><h3>ارائه آنلاین</h3><p>برای متخصصان خارج از کشور، به‌صورت آنلاین.</p><span class="go">ارسال پیشنهاد ←</span></a>
+    <div class="obs-head"><span class="badge">آغاز عمومی برنامه</span><h2>{{ S.observatory_title }}</h2></div>
+    <p class="prose">{{ S.observatory_text }}</p>
+
+    <div class="flow">
+      <div><b>۱</b><span>شناسنامه‌دار کردن داده‌ها<small>کاتالوگ فراداده‌ی استانی</small></span></div>
+      <div><b>۲</b><span>اتصال امن و استاندارد<small>بدون انتقال فیزیکی داده</small></span></div>
+      <div><b>۳</b><span>تدوین شاخص‌ها<small>با تأیید کمیته‌ی علمی</small></span></div>
+      <div><b>۴</b><span>تحلیل و تصمیم‌سازی<small>داشبورد مدیریتی و ستاد بحران</small></span></div>
+    </div>
+
+    <div class="twin">
+      <div class="tw"><h3><i class="g"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></i>رصد توسعه<small>پایش روند توسعه در شرایط عادی</small></h3>
+        <ul class="chips"><li>دسترسی به خدمات</li><li>جمعیت و مهاجرت</li><li>زیرساخت‌ها</li><li>منابع آب و محیط زیست</li><li>نابرابری فضایی</li></ul></div>
+      <div class="tw r"><h3><i class="o"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M3 13h4l2-4 3 7 2-3h7"/></svg></i>رصد تاب‌آوری<small>سنجش آمادگی در برابر مخاطرات</small></h3>
+        <ul class="chips"><li>زلزله</li><li>سیل</li><li>خشکسالی</li><li>فرونشست</li><li>دریاچه ارومیه</li><li>دسترسی به مراکز امدادی و درمانی</li></ul></div>
+    </div>
+
+    <h3 class="sub">اصول راهنما</h3>
+    <div class="grid3 principles">
+      <div class="card sm"><h3>داده نزد دارنده می‌ماند</h3><p>دستگاه متولی، مالک و مسئول صحت داده است؛ رصدخانه آن را شناسایی می‌کند و از طریق خدمات استاندارد به آن متصل می‌شود.</p></div>
+      <div class="card sm"><h3>هم‌سویی با زیرساخت ملی</h3><p>رصدخانه، داده‌ی پایه یا نقشه‌ی مرجع تولید نمی‌کند و از خدمات و استانداردهای ملی داده‌ی مکانی پیروی می‌کند.</p></div>
+      <div class="card sm"><h3>امنیت از ابتدای طراحی</h3><p>برای هر داده، سطح دسترسی تعریف می‌شود و داده‌ی حساس تنها در قالب خروجی تجمیعی به کار می‌رود.</p></div>
+      <div class="card sm"><h3>پرسش پیش از فناوری</h3><p>ابتدا پرسش‌های مدیریتی و شاخص‌ها تعیین می‌شود و سپس داده و فناوری متناسب با آن‌ها انتخاب می‌گردد.</p></div>
+      <div class="card sm"><h3>اعتبار علمی شاخص‌ها</h3><p>فرمول هر شاخص با تأیید کمیته‌ی علمی متشکل از اساتید دانشگاه تدوین و روش محاسبه‌ی آن منتشر می‌شود.</p></div>
+      <div class="card sm"><h3>اثرگذاری بر تصمیم</h3><p>خروجی‌های رصدخانه به فرایندهای واقعی تصمیم‌گیری، از جمله شورای برنامه‌ریزی و ستاد مدیریت بحران، پیوند می‌خورد.</p></div>
+    </div>
+
+    <h3 class="sub">نمونه پرسش‌های مدیریتی رصدخانه</h3>
+    <ul class="qs">
+      <li>چه سهمی از جمعیت در بازه‌ی ۱۵ دقیقه به مراکز درمانی دسترسی ندارد؟</li>
+      <li>کدام مناطق در برابر زلزله آسیب‌پذیرترند؟</li>
+      <li>در صورت انسداد یک محور ارتباطی، کدام سکونتگاه‌ها محصور می‌شوند؟</li>
+      <li>روند فرونشست و تغییر سطح منابع آب چگونه است؟</li>
+      <li>توزیع خدمات میان شهرستان‌ها تا چه اندازه متوازن است؟</li>
+    </ul>
+
+    <h3 class="sub">معماری شش‌لایه</h3>
+    <div class="layers6">
+      <div><b>۱ · داده</b><span>نگهداری نزد دستگاه‌ها · PostgreSQL/PostGIS</span></div>
+      <div><b>۲ · خدمات</b><span>ارائه‌ی استاندارد داده · OGC API، WMS، WFS</span></div>
+      <div><b>۳ · فراداده</b><span>شناسایی و جست‌وجو · ISO 19115، CSW</span></div>
+      <div><b>۴ · امنیت</b><span>کنترل دسترسی مبتنی بر نقش و ثبت رویداد</span></div>
+      <div><b>۵ · تحلیل و رصد</b><span>شاخص، سناریو و داشبورد · تحلیل شبکه و مکانی</span></div>
+      <div><b>۶ · بهره‌برداری</b><span>مدیران و کارشناسان · وب، موبایل و QGIS</span></div>
+    </div>
+    <p class="note">ترجیح بر نرم‌افزارها و استانداردهای متن‌باز است.</p>
+
+    <h3 class="sub">تحلیل هوشمند</h3>
+    <ul class="tracks light">
+      <li>تولید خودکار فراداده</li><li>دستیار پرسش‌وپاسخ به زبان فارسی</li><li>پایش تغییرات با تصاویر ماهواره‌ای</li><li>گزارش‌های دوره‌ای خودکار</li>
+    </ul>
+
+    {% if S.atlas_url %}
+    <div class="atlas">
+      <div><h3>اطلس مخاطرات استان</h3><p>سامانه‌ی وب‌جی‌آی‌اس پژوهشکده با پشتوانه‌ی حدود یک ترابایت داده در هشت حوزه‌ی مخاطره، از جمله سیل، زلزله و فرونشست؛ نخستین منبع ثبت‌شده در کاتالوگ داده‌ی رصدخانه.</p></div>
+      <a class="btn gold" href="{{ S.atlas_url }}" rel="noopener">مشاهده‌ی اطلس</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section id="program" class="wrap narrow block">
+  <p class="eyebrow">برنامه‌ی نشست</p>
+  <h2>برنامه‌ی تقریبی روز نشست</h2>
+  <p class="muted">برنامه‌ی نهایی و ساعت دقیق هر بخش از طریق همین صفحه اعلام می‌شود.</p>
+  <ol class="sched">{% for it in schedule %}<li><time>{{ it.time_text }}</time><div><b>{{ it.title }}</b>{% if it.description %}<span>{{ it.description }}</span>{% endif %}</div></li>{% endfor %}</ol>
+  {% if dates %}<h3 class="sub">تاریخ‌های مهم</h3>
+  <ul class="tl">{% for d in dates %}<li{% if d.highlight %} class="hl"{% endif %}><b>{{ d.title }}</b><span>{{ d.date_text }}</span></li>{% endfor %}</ul>{% endif %}
+</section>
+
+<section id="tracks" class="band">
+  <div class="wrap block">
+    <p class="eyebrow">محورهای تخصصی</p><h2>محورهای نشست</h2>
+    <div class="topics">
+      {% for t in S.track_list %}<div><b>{{ forloop.counter|fa }}</b>{{ t }}</div>{% endfor %}
     </div>
   </div>
 </section>
-{% endif %}
 
-{% if dates %}
-<section id="dates" class="wrap narrow block">
-  <p class="eyebrow">برنامه‌ی زمانی</p><h2>تاریخ‌های مهم</h2>
-  <ul class="tl">{% for d in dates %}<li{% if d.highlight %} class="hl"{% endif %}><b>{{ d.title }}</b><span>{{ d.date_text }}</span></li>{% endfor %}</ul>
+{% if S.call_open %}
+<section id="call" class="wrap block">
+  <p class="eyebrow">فراخوان</p>
+  <h2>ارائه‌ی تجربه و پروژه‌ی شاخص</h2>
+  <p class="muted">مهلت ارسال پیشنهاد: <b>{{ S.call_deadline|jdate }}</b></p>
+  <div class="grid3">
+    {% for k, label in kinds %}<a class="card link" href="{% url 'core:call' %}?type={{ k }}"><h3>{{ label }}</h3><span class="go">ثبت پیشنهاد ←</span></a>{% endfor %}
+  </div>
 </section>
 {% endif %}
 
-{% if organizers or scientific %}
-<section class="wrap block">
-  {% if scientific %}<h2>کمیته علمی</h2>
-  <div class="people">{% for m in scientific %}{% include "core/_person.html" %}{% endfor %}</div>{% endif %}
-  {% if organizers %}<h2>تیم برگزاری</h2>
-  <div class="people">{% for m in organizers %}{% include "core/_person.html" %}{% endfor %}</div>{% endif %}
+{% if team_groups %}
+<section id="organs" class="wrap block">
+  <p class="eyebrow">ارکان نشست</p><h2>کمیته‌ها و دبیرخانه</h2>
+  {% for title, members in team_groups %}<h3 class="sub">{{ title }}</h3>
+  <div class="people">{% for m in members %}<div class="person">{% if m.photo %}<img src="{{ m.photo.url }}" alt="{{ m.name }}">{% else %}<div class="avatar">{{ m.name|slice:":1" }}</div>{% endif %}<b>{{ m.name }}</b><small>{{ m.role }}</small></div>{% endfor %}</div>{% endfor %}
 </section>
 {% endif %}
 
 {% if partner_groups %}
 <section class="wrap block">
-  {% for title, items in partner_groups %}
-  <h3 class="sub">{{ title }}</h3>
-  <div class="logos">{% for p in items %}
-    {% if p.url %}<a href="{{ p.url }}" rel="noopener" class="logo">{% else %}<span class="logo">{% endif %}
-    {% if p.logo %}<img src="{{ p.logo.url }}" alt="{{ p.name }}">{% endif %}<em>{{ p.name }}</em>
-    {% if p.url %}</a>{% else %}</span>{% endif %}{% endfor %}</div>
-  {% endfor %}
+  {% for title, items in partner_groups %}<h3 class="sub">{{ title }}</h3>
+  <div class="logos">{% for p in items %}{% if p.url %}<a href="{{ p.url }}" rel="noopener" class="logo">{% else %}<span class="logo">{% endif %}{% if p.logo %}<img src="{{ p.logo.url }}" alt="{{ p.name }}">{% endif %}<em>{{ p.name }}</em>{% if p.url %}</a>{% else %}</span>{% endif %}{% endfor %}</div>{% endfor %}
 </section>
 {% endif %}
 
 {% if faqs %}
 <section id="faq" class="band"><div class="wrap narrow block">
-  <p class="eyebrow">پرسش‌های متداول</p><h2>پاسخ سؤال‌های رایج</h2>
+  <p class="eyebrow">پرسش‌های متداول</p><h2>پاسخ به پرسش‌های رایج</h2>
   {% for f in faqs %}<details><summary>{{ f.question }}</summary><p>{{ f.answer }}</p></details>{% endfor %}
 </div></section>
 {% endif %}
 
 <section class="wrap block">
   <div class="cta-band">
-    <h2>{% if S.is_registration %}جای خود را رزرو کنید{% else %}بخشی از اولین روز GIS ارومیه باشید{% endif %}</h2>
-    <p>{% if S.is_registration %}ظرفیت محدود است.{% else %}پیش‌ثبت‌نام رایگان است و به ما کمک می‌کند رویداد بهتری بسازیم.{% endif %}</p>
+    <h2>{% if S.is_registration %}ثبت‌نام در نشست{% else %}پیش‌ثبت‌نام در نشست{% endif %}</h2>
+    <p>شرکت در نشست رایگان است و ثبت‌نام قبلی به‌دلیل محدودیت ظرفیت سالن الزامی است.</p>
     <div class="cta" style="justify-content:center">
       <a class="btn gold" href="{% url 'core:register' %}">{% if S.is_registration %}ثبت‌نام{% else %}پیش‌ثبت‌نام{% endif %}</a>
-      {% if S.show_sponsors_section %}<a class="btn ghost" style="color:#fff;border-color:#fff" href="{% url 'core:sponsor' %}">حامی رویداد شوید</a>{% endif %}
+      {% if S.show_sponsors_section %}<a class="btn ghost light" href="{% url 'core:sponsor' %}">حمایت از نشست</a>{% endif %}
     </div>
     <div class="share">
-      <a id="sh-tg" href="#" rel="noopener">اشتراک در تلگرام</a>
-      <a id="sh-wa" href="#" rel="noopener">واتساپ</a>
-      <button type="button" id="sh-copy">کپی لینک</button>
+      <a id="sh-tg" href="#" rel="noopener">اشتراک در تلگرام</a><a id="sh-wa" href="#" rel="noopener">واتساپ</a><button type="button" id="sh-copy">کپی پیوند</button>
     </div>
   </div>
 </section>
 
 <script>
 (function(){
+  var W=480,H=40,m=H/2,d='M0 '+m;
+  for(var x=0;x<=W;x+=3){var y=m;
+    if(x>50&&x<220){var k=(x-50)/170,a=Math.sin(Math.PI*k)*Math.exp(-Math.pow(k-.35,2)/.05)*17;y=m+((x/3)%2?a:-a)*(0.6+0.4*Math.sin(x*1.7))}
+    else if(x>=220){y=m+7*Math.sin(x/30)}
+    d+=' L'+x+' '+y.toFixed(1)}
+  document.getElementById('seis').innerHTML='<svg viewBox="0 0 '+W+' '+H+'" width="100%" style="max-width:'+W+'px;display:block;transform:scaleX(-1)"><path d="'+d+'" fill="none" stroke="#e9a62a" stroke-width="3" stroke-linejoin="round"/><circle cx="'+(W-4)+'" cy="'+m+'" r="6" fill="#0f4c4a"/><circle cx="4" cy="'+m+'" r="6" fill="#e9a62a"/></svg>';
   var el=document.getElementById('count');if(!el)return;
-  var t=new Date(el.dataset.date+'T09:00:00+03:30').getTime();
+  var t=new Date(el.dataset.date+'T08:00:00+03:30').getTime();
   var fa=function(n){return String(n).replace(/\d/g,function(d){return '۰۱۲۳۴۵۶۷۸۹'[d]})};
   function tick(){var s=Math.max(0,Math.floor((t-Date.now())/1000));
     document.getElementById('cd').textContent=fa(Math.floor(s/86400));
     document.getElementById('ch').textContent=fa(Math.floor(s%86400/3600));
-    document.getElementById('cm').textContent=fa(Math.floor(s%3600/60));
-    document.getElementById('cs').textContent=fa(s%60);}
-  tick();setInterval(tick,1000);
-  var u=encodeURIComponent(location.href.split('#')[0]),m=encodeURIComponent(document.title);
-  document.getElementById('sh-tg').href='https://t.me/share/url?url='+u+'&text='+m;
-  document.getElementById('sh-wa').href='https://wa.me/?text='+m+'%20'+u;
+    document.getElementById('cm').textContent=fa(Math.floor(s%3600/60));}
+  tick();setInterval(tick,30000);
+  var u=encodeURIComponent(location.href.split('#')[0]),mm=encodeURIComponent(document.title);
+  document.getElementById('sh-tg').href='https://t.me/share/url?url='+u+'&text='+mm;
+  document.getElementById('sh-wa').href='https://wa.me/?text='+mm+'%20'+u;
   document.getElementById('sh-copy').onclick=function(){var b=this;navigator.clipboard&&navigator.clipboard.writeText(decodeURIComponent(u)).then(function(){b.textContent='کپی شد ✓'})};
 })();
 </script>

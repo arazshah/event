@@ -25,18 +25,17 @@ def _clean_phone(value):
 class SubmissionForm(HoneypotMixin, forms.ModelForm):
     class Meta:
         model = Submission
-        fields = ["kind", "mode", "full_name", "email", "phone", "affiliation", "country_city", "title",
+        fields = ["kind", "full_name", "email", "phone", "affiliation", "title",
                   "abstract", "track", "duration", "bio", "link", "cv_file", "slides_file"]
         widgets = {"abstract": forms.Textarea(attrs={"rows": 6}), "bio": forms.Textarea(attrs={"rows": 3}),
-                   "kind": forms.RadioSelect, "mode": forms.RadioSelect}
+                   "kind": forms.RadioSelect}
 
     def __init__(self, *args, tracks=(), **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["phone"].required = True
         self.fields["duration"].required = False
         self.fields["abstract"].label = "چکیده (حداکثر ۳۰۰ کلمه)"
-        self.fields["kind"].choices = Submission.KINDS
-        self.fields["mode"].choices = Submission.MODES
+        self.fields["kind"].choices = [c for c in Submission.KINDS if c[0] != Submission.KIND_ONLINE]
         if tracks:
             self.fields["track"] = forms.ChoiceField(
                 label="زیرمحور", required=False, choices=[("", "---------")] + [(t, t) for t in tracks] + [("سایر", "سایر")]
@@ -45,18 +44,13 @@ class SubmissionForm(HoneypotMixin, forms.ModelForm):
     def clean_phone(self):
         return _clean_phone(self.cleaned_data["phone"])
 
-    def clean(self):
-        data = super().clean()
-        if data.get("kind") == Submission.KIND_ONLINE:
-            data["mode"] = "online"
-        return data
 
 
 class RegistrationForm(HoneypotMixin, forms.ModelForm):
     class Meta:
         model = Registration
-        fields = ["full_name", "phone", "email", "role", "organization", "attend", "interests"]
-        widgets = {"interests": forms.Textarea(attrs={"rows": 3}), "role": forms.RadioSelect, "attend": forms.RadioSelect}
+        fields = ["full_name", "phone", "email", "role", "organization", "position", "interests"]
+        widgets = {"interests": forms.Textarea(attrs={"rows": 3}), "role": forms.RadioSelect}
 
     def __init__(self, *args, is_final=False, **kwargs):
         super().__init__(*args, **kwargs)

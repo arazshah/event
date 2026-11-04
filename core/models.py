@@ -3,6 +3,7 @@ import uuid
 
 from django.db import models
 
+from . import defaults as D
 from .storage import private_storage
 from .validators import validate_upload
 
@@ -21,36 +22,23 @@ class SiteSettings(models.Model):
 
     event_name = models.CharField("نام رویداد", max_length=120, default="روز جهانی GIS ارومیه")
     tagline = models.CharField("محور / زیرعنوان", max_length=200, default="GeoAI | هوش مصنوعی در علوم مکانی")
-    hero_text = models.TextField(
-        "متن معرفی",
-        default="تازه‌ترین و تخصصی‌ترین مباحث هوش مصنوعی و علوم مکانی، در یک روز. "
-        "فراخوان ارائه، سخنرانی و کارگاه باز است.",
-    )
-    event_date = models.DateField("تاریخ برگزاری (شمسی، مثل ۱۴۰۵/۰۸/۲۸)", default=datetime.date(2026, 11, 19))
-    time_text = models.CharField("ساعت", max_length=100, default="به‌زودی اعلام می‌شود", blank=True)
+    hero_text = models.TextField("متن معرفی", default=D.HERO_TEXT)
+    event_date = models.DateField("تاریخ برگزاری (شمسی، مثل ۱۴۰۵/۰۹/۰۲)", default=D.EVENT_DATE)
+    time_text = models.CharField("ساعت", max_length=100, default=D.TIME_TEXT, blank=True)
     city = models.CharField("شهر", max_length=60, default="ارومیه")
-    venue_text = models.CharField("مکان", max_length=200, default="به‌زودی اعلام می‌شود", blank=True)
+    venue_text = models.CharField("مکان", max_length=200, default=D.VENUE_TEXT, blank=True)
     venue_url = models.URLField("لینک نقشه مکان", blank=True)
-    format_text = models.CharField("نحوه برگزاری", max_length=120, default="حضوری + پخش آنلاین", blank=True)
+    format_text = models.CharField("نحوه برگزاری", max_length=120, default=D.FORMAT_TEXT, blank=True)
 
     call_open = models.BooleanField("فراخوان باز است", default=True)
-    call_deadline = models.DateField("مهلت ارسال پیشنهاد (شمسی)", default=datetime.date(2026, 11, 6))
+    call_deadline = models.DateField("مهلت ارسال پیشنهاد (شمسی)", default=D.CALL_DEADLINE)
 
-    networking_text = models.TextField(
-        "متن شبکه‌سازی",
-        default="فرصتی برای دیدار و گفتگوی رودررو با متخصصان GIS، سنجش‌ازدور و هوش مصنوعی و ساختن ارتباط‌های حرفه‌ای.",
-        blank=True,
-    )
-    unveil_text = models.TextField(
-        "متن رونمایی محصول",
-        default="در این رویداد از محصولات هوشمند حوزه علوم مکانی رونمایی می‌شود.",
-        blank=True,
-    )
-    tracks_text = models.TextField(
-        "زیرمحورها (هر خط یک مورد)",
-        default="سنجش‌ازدور و یادگیری عمیق\nمدل‌های زبانی (LLM) و داده مکانی\nPostGIS و پایگاه داده مکانی برای هوش مصنوعی\nکاربردهای شهری و محیط‌زیستی هوش مصنوعی",
-        blank=True,
-    )
+    networking_text = models.TextField("متن شبکه‌سازی", default=D.NETWORKING_TEXT, blank=True)
+    unveil_text = models.TextField("متن رونمایی محصول", default=D.UNVEIL_TEXT, blank=True)
+    tracks_text = models.TextField("محورهای تخصصی (هر خط یک مورد)", default=D.TRACKS_TEXT, blank=True)
+    observatory_title = models.CharField("عنوان بخش رصدخانه", max_length=160, default=D.OBSERVATORY_TITLE)
+    observatory_text = models.TextField("متن معرفی رصدخانه", default=D.OBSERVATORY_TEXT, blank=True)
+    atlas_url = models.URLField("لینک اطلس مخاطرات", default=D.ATLAS_URL, blank=True)
 
     phase = models.CharField("مرحله ثبت‌نام", max_length=20, choices=PHASES, default=PHASE_PREREG)
     payment_link = models.URLField("لینک پرداخت زرین‌پال", blank=True)
@@ -89,10 +77,10 @@ class SiteSettings(models.Model):
 
 
 class TeamMember(models.Model):
-    GROUPS = [("organizer", "تیم برگزاری"), ("scientific", "کمیته علمی")]
+    GROUPS = [("scientific", "کمیته علمی"), ("executive", "کمیته اجرایی"), ("secretariat", "دبیرخانه")]
     name = models.CharField("نام", max_length=120)
     role = models.CharField("سمت", max_length=120, blank=True)
-    group = models.CharField("گروه", max_length=20, choices=GROUPS, default="organizer")
+    group = models.CharField("گروه", max_length=20, choices=GROUPS, default="scientific")
     photo = models.ImageField("عکس", upload_to="team/", blank=True)
     order = models.PositiveIntegerField("ترتیب", default=0)
     visible = models.BooleanField("نمایش", default=True)
@@ -100,7 +88,7 @@ class TeamMember(models.Model):
     class Meta:
         ordering = ["group", "order", "id"]
         verbose_name = "عضو تیم"
-        verbose_name_plural = "تیم و کمیته علمی"
+        verbose_name_plural = "کمیته‌ها و دبیرخانه"
 
     def __str__(self):
         return self.name
@@ -108,14 +96,13 @@ class TeamMember(models.Model):
 
 class Partner(models.Model):
     KINDS = [
-        ("host", "میزبان"),
-        ("co", "همکار برگزاری"),
-        ("gold", "اسپانسر طلایی"),
-        ("silver", "اسپانسر نقره‌ای"),
+        ("main", "حامی اصلی"),
+        ("special", "حامی تخصصی"),
         ("media", "حامی رسانه‌ای"),
+        ("co", "همکار"),
     ]
     name = models.CharField("نام", max_length=120)
-    kind = models.CharField("نوع", max_length=10, choices=KINDS, default="co")
+    kind = models.CharField("نوع", max_length=10, choices=KINDS, default="special")
     logo = models.ImageField("لوگو", upload_to="partners/", blank=True)
     url = models.URLField("وب‌سایت", blank=True)
     order = models.PositiveIntegerField("ترتیب", default=0)
@@ -152,9 +139,9 @@ class SponsorLevel(models.Model):
 class Submission(models.Model):
     KIND_SPEAKER, KIND_PRESENT, KIND_WORKSHOP, KIND_ONLINE = "speaker", "presentation", "workshop", "online_abroad"
     KINDS = [
-        (KIND_SPEAKER, "سخنران"),
-        (KIND_PRESENT, "ارائه"),
-        (KIND_WORKSHOP, "کارگاه"),
+        (KIND_SPEAKER, "سخنرانی تخصصی"),
+        (KIND_PRESENT, "ارائه‌ی تجربه یا پروژه‌ی شاخص"),
+        (KIND_WORKSHOP, "کارگاه تخصصی"),
         (KIND_ONLINE, "ارائه آنلاین از خارج از کشور"),
     ]
     MODES = [("inperson", "حضوری"), ("online", "آنلاین"), ("either", "هر دو / فرقی ندارد")]
@@ -165,7 +152,7 @@ class Submission(models.Model):
     full_name = models.CharField("نام و نام خانوادگی", max_length=120)
     email = models.EmailField("ایمیل")
     phone = models.CharField("موبایل", max_length=30, blank=True)
-    affiliation = models.CharField("دانشگاه / سازمان", max_length=160, blank=True)
+    affiliation = models.CharField("دستگاه / سازمان / دانشگاه", max_length=160, blank=True)
     country_city = models.CharField("کشور / شهر", max_length=100, blank=True)
     title = models.CharField("عنوان", max_length=200)
     abstract = models.TextField("چکیده")
@@ -190,15 +177,23 @@ class Submission(models.Model):
 
 class Registration(models.Model):
     ATTEND = [("inperson", "حضوری"), ("online", "آنلاین")]
-    ROLES = [("student", "دانشجو"), ("professional", "شاغل / پژوهشگر"), ("other", "سایر")]
+    ROLES = [
+        ("manager", "مدیر دستگاه اجرایی"),
+        ("expert", "کارشناس دستگاه اجرایی"),
+        ("academic", "عضو هیئت علمی / پژوهشگر"),
+        ("student", "دانشجو"),
+        ("private", "بخش خصوصی / شرکت دانش‌بنیان"),
+        ("other", "سایر"),
+    ]
 
     full_name = models.CharField("نام و نام خانوادگی", max_length=120)
     phone = models.CharField("موبایل", max_length=30)
     email = models.EmailField("ایمیل")
-    role = models.CharField("وضعیت", max_length=15, choices=ROLES, default="student")
-    organization = models.CharField("دانشگاه / سازمان", max_length=160, blank=True)
+    role = models.CharField("نوع شرکت‌کننده", max_length=15, choices=ROLES, default="expert")
+    organization = models.CharField("دستگاه / سازمان / دانشگاه", max_length=160, blank=True)
+    position = models.CharField("سمت", max_length=120, blank=True)
     attend = models.CharField("نحوه شرکت", max_length=10, choices=ATTEND, default="inperson")
-    interests = models.TextField("علاقه‌مندی‌ها / توضیحات", blank=True)
+    interests = models.TextField("توضیحات (اختیاری)", blank=True)
     is_final = models.BooleanField("ثبت‌نام قطعی (مرحله پرداخت)", default=False, editable=False)
     paid = models.BooleanField("پرداخت تأیید شد", default=False)
     created_at = models.DateTimeField("زمان ثبت", auto_now_add=True)
@@ -263,3 +258,19 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
+
+
+class ScheduleItem(models.Model):
+    time_text = models.CharField("ساعت", max_length=40, help_text="مثلاً ۰۹:۰۰ یا ۰۹:۰۰ تا ۰۹:۳۰")
+    title = models.CharField("عنوان", max_length=200)
+    description = models.CharField("توضیح", max_length=300, blank=True)
+    order = models.PositiveIntegerField("ترتیب", default=0)
+    visible = models.BooleanField("نمایش", default=True)
+
+    class Meta:
+        ordering = ["order", "id"]
+        verbose_name = "ردیف برنامه"
+        verbose_name_plural = "برنامه نشست"
+
+    def __str__(self):
+        return f"{self.time_text} {self.title}"
