@@ -1,0 +1,90 @@
+<!doctype html><html lang="fa"><head><meta charset="utf-8"><link rel="stylesheet" href="common.css">
+<style>
+html,body{width:1080px;height:1620px}
+body{background:#f4f2e6}
+.abs{position:absolute}
+.land:after{content:"";position:absolute;left:0;right:0;bottom:0;height:160px;background:linear-gradient(transparent,#f4f2e6)}
+.land{left:0;top:0;width:1080px;height:900px;background:url(../../core/static/core/img/hero-landscape.svg) center bottom/cover no-repeat,linear-gradient(#cfe6ef,#f4f2e6)}
+.orgs{left:50%;transform:translateX(-50%);top:30px;background:#fff;border-radius:30px;padding:18px 44px 14px;text-align:center;box-shadow:0 20px 44px -28px #12353f99;white-space:nowrap}
+.logos{display:flex;align-items:center;justify-content:center;gap:40px}
+.logos img{display:block;object-fit:contain}
+.sep{width:2px;height:84px;background:#d9e0d2}
+.orgs p{margin-top:8px;font-size:19px;font-weight:700;color:#566b6f}
+.head{left:0;right:0;top:232px;text-align:center}
+.kicker{display:inline-block;font-size:21px;font-weight:800;color:#0f4c4a;letter-spacing:.3px}
+.kicker i{display:inline-block;width:40px;height:2px;background:#e9a62a;vertical-align:middle;margin:0 14px}
+h1{font-size:112px;font-weight:900;line-height:1.2;white-space:nowrap;color:#12353f;margin-top:4px;text-shadow:0 2px 0 #fff,0 0 34px rgba(255,255,255,.95)}
+h1 em{font-style:normal;color:#0f4c4a}
+.axis{margin-top:8px;font-size:40px;font-weight:900}
+.axis mark{padding:2px 22px}
+.formal{margin-top:16px;font-size:24px;font-weight:700;color:#12353f;opacity:.85}
+.globe{left:70px;top:560px;width:300px;height:300px}
+.sphere{position:absolute;inset:0;border-radius:50%;background:url(../../core/static/core/img/crop-globe.jpg) center/150% auto;box-shadow:0 0 0 6px #ffffff59,0 0 60px 14px rgba(120,200,220,.5),0 30px 60px -20px #12353faa}
+.sphere:after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.55),rgba(255,255,255,0) 32%),radial-gradient(circle at 50% 50%,rgba(0,0,0,0) 55%,rgba(10,40,50,.55) 100%)}
+.net{position:absolute;left:-45px;top:-45px;width:390px;height:390px}
+.when{right:70px;top:585px;width:560px;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);border-radius:32px;padding:26px 34px;box-shadow:0 26px 50px -30px #12353f;display:flex;gap:28px;align-items:center}
+.cal{flex:none;width:150px;border-radius:24px;overflow:hidden;border:3px solid #0f4c4a;text-align:center;background:#fff}
+.cal .h{background:#0f4c4a;color:#fff;font-size:22px;font-weight:800;padding:4px 0}
+.cal .d{font-size:78px;font-weight:900;line-height:1.15;color:#0f4c4a}
+.cal .m{font-size:23px;font-weight:800;padding-bottom:8px}
+.when ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.when li{display:flex;align-items:center;gap:14px;font-size:27px;font-weight:800;line-height:1.35}
+.when li small{display:block;font-size:20px;font-weight:600;color:#566b6f}
+.when svg{flex:none;width:34px;height:34px;fill:none;stroke:#0f4c4a;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.obs{left:70px;right:70px;top:930px;background:#0f4c4a;color:#fff;border-radius:34px;padding:34px 44px;text-align:center;background-image:linear-gradient(135deg,#0f4c4a,#12353f)}
+.badge{display:inline-block;background:#e9a62a;color:#3a2800;font-size:20px;font-weight:900;padding:3px 18px;border-radius:99px}
+.obs h2{font-size:48px;font-weight:900;margin:12px 0 6px}
+.obs p{font-size:24px;font-weight:600;color:#cfe3de;line-height:1.7}
+.obs .pair{display:flex;justify-content:center;gap:16px;margin-top:16px}
+.obs .pair span{border:2px solid #ffffff55;border-radius:99px;padding:3px 26px;font-size:23px;font-weight:800}
+.hl{left:70px;right:70px;top:1236px;display:grid;grid-template-columns:repeat(3,1fr);text-align:center}
+.hl div{font-size:24px;font-weight:800;color:#12353f;display:flex;flex-direction:column;align-items:center;gap:8px;border-left:2px solid #d9e0d2}
+.hl div:last-child{border-left:0}
+.hl svg{width:46px;height:46px;fill:none;stroke:#0f4c4a;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.foot{left:0;right:0;bottom:0;height:250px;background:#0f4c4a;color:#fff;padding:0 70px;display:flex;align-items:center;justify-content:space-between}
+.foot:before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:#e9a62a}
+.reg small{display:block;font-size:24px;font-weight:700;color:#cfe3de;margin-bottom:10px}
+.reg b{display:inline-block;direction:ltr;background:#e9a62a;color:#2e2000;font-size:46px;font-weight:900;padding:10px 34px;border-radius:20px}
+.sp{display:flex;gap:26px;align-items:flex-end}
+.sp small{display:block;font-size:17px;font-weight:800;color:#e9a62a;margin-bottom:8px;text-align:center}
+.sp .plate{background:#fff;border-radius:16px;padding:8px 12px;height:84px;display:flex;align-items:center}
+.sp img{display:block}
+</style></head><body>
+<div class="abs land"></div>
+<div class="abs orgs">
+ <div class="logos"><img src="../../core/static/core/img/logo-urmia-university.png" style="height:100px"><div class="sep"></div><img src="../../core/static/core/img/logo-pajooheshkadeh.png" style="height:94px"></div>
+ <p>دانشگاه ارومیه · پژوهشکده مدیریت خطرپذیری، بحران و مهندسی زیرساخت‌ها</p>
+</div>
+<div class="abs head">
+ <div class="kicker"><i></i>نخستین دوره · به مناسبت روز جهانی GIS<i></i></div>
+ <h1>روز جهانی <em>GIS</em> ارومیه</h1>
+ <div class="axis"><mark>GeoAI | هوش مصنوعی در علوم مکانی</mark></div>
+ <div class="formal">نشست تخصصی مدیران، اساتید و کارشناسان</div>
+</div>
+<div class="abs globe"><div class="sphere"></div><img class="net" src="../../core/static/core/img/globe-net.svg"></div>
+<div class="abs when">
+ <div class="cal"><div class="h">دوشنبه</div><div class="d">۲</div><div class="m">آذر ۱۴۰۵</div></div>
+ <ul>
+  <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>ساعت ۸ تا ۱۳</li>
+  <li><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>سالن آرتیمیا<small>پردیس دانشگاه ارومیه</small></span></li>
+ </ul>
+</div>
+<div class="abs obs">
+ <span class="badge">آغاز عمومی برنامه</span>
+ <h2>رصدخانه توسعه و تاب‌آوری استان</h2>
+ <p>تحلیل داده‌های مکانی دستگاه‌ها، در خدمت تصمیم‌گیری مدیران استان</p>
+ <div class="pair"><span>رصد توسعه</span><span>رصد تاب‌آوری</span></div>
+</div>
+<div class="abs hl">
+ <div><svg viewBox="0 0 24 24"><circle cx="6" cy="7" r="3"/><circle cx="18" cy="7" r="3"/><circle cx="12" cy="17" r="3"/><path d="M8.5 8.8l2 5.7M15.5 8.8l-2 5.7M9 7h6"/></svg>شبکه‌سازی تخصصی</div>
+ <div><svg viewBox="0 0 24 24"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2M9 13l2 2M14 4c3-1 6-1 6-1s0 3-1 6l-6 7-5-5z"/><circle cx="15" cy="9" r="1.5"/></svg>رونمایی محصولات هوشمند</div>
+ <div><svg viewBox="0 0 24 24"><path d="M3 21V10l5 3V10l5 3V6l8 4v11z"/><path d="M7 17h2M12 17h2M17 17h1"/></svg>پیوند دانشگاه و صنعت</div>
+</div>
+<div class="abs foot">
+ <div class="reg"><small>ثبت‌نام رایگان و الزامی</small><b>event.postgis.ir</b></div>
+ <div class="sp">
+  <div><small>حامی فناوری مکانی</small><div class="plate" style="gap:10px;background:#12353f;border:2px solid #ffffff33"><img src="../../core/static/core/img/logo-postgis.png" style="height:62px;border-radius:12px"><span style="font-size:17px;font-weight:900;line-height:1.3">پایگاه داده<br>مکانی ابری</span></div></div>
+  <div><small>حامی اجرایی</small><div class="plate"><img src="../../core/static/core/img/logo-zhasco.png" style="height:62px"></div></div>
+ </div>
+</div>
+</body></html>
