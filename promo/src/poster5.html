@@ -14,20 +14,22 @@ body{background:#f4f2e6}
 .statement b{color:var(--pri);font-weight:900}
 .statement .v{background:var(--acsoft);padding:0 10px;border-radius:8px;font-weight:900}
 /* hero */
-.hero{right:40px;top:210px;width:660px;display:flex;flex-direction:column;align-items:flex-end;gap:7px;z-index:4}
+.top{left:20px;right:20px;top:206px;display:flex;flex-direction:column;align-items:center;gap:6px;z-index:4}
+.hero{right:40px;top:392px;width:640px;display:flex;flex-direction:column;align-items:flex-end;gap:10px;z-index:4}
+.formal{font-size:23px;font-weight:900;color:#fff;background:var(--pri);padding:5px 20px;border-radius:12px;box-shadow:0 12px 24px -14px #0f4c4a}
 .kicker{display:inline-flex;gap:10px;align-items:center;background:var(--pri);color:#fff;font-weight:800;font-size:20px;padding:5px 20px;border-radius:99px;box-shadow:0 10px 24px -14px #0f4c4a}
 .kicker span{direction:ltr;color:var(--ac);font-weight:900}
-h1{font-size:100px;font-weight:900;line-height:1.05;white-space:nowrap;text-align:right;color:var(--dark);text-shadow:0 2px 0 #fff,0 0 30px rgba(255,255,255,.9)}
+h1{font-size:108px;font-weight:900;line-height:1.1;white-space:nowrap;text-align:center;letter-spacing:-1px;color:var(--dark);text-shadow:0 2px 0 #fff,0 0 30px rgba(255,255,255,.9)}
 h1 em{font-style:normal;color:var(--pri)}
-.axis{font-size:38px;font-weight:900;margin-top:4px}
+.axis{font-size:36px;font-weight:900;margin-top:4px}
 .axis mark{box-shadow:0 10px 24px -16px #12353f88}
 .sub{font-size:21px;font-weight:800;color:var(--tx);background:rgba(255,255,255,.75);padding:3px 16px;border-radius:12px}
 /* globe */
-.globe{left:40px;top:230px;width:380px;height:380px;z-index:3}
+.globe{left:58px;top:362px;width:290px;height:290px;z-index:3}
 .sphere{position:absolute;inset:0;border-radius:50%;background:url(../assets/crop-globe.jpg) center/150% auto;box-shadow:0 0 0 6px rgba(255,255,255,.35),0 0 60px 16px rgba(120,200,220,.55),0 30px 60px -20px #12353faa}
 .sphere:after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 34% 30%,rgba(255,255,255,.55),rgba(255,255,255,0) 32%),radial-gradient(circle at 50% 50%,rgba(0,0,0,0) 55%,rgba(10,40,50,.55) 100%)}
-.net{position:absolute;inset:-60px;overflow:visible}
-.layers{left:70px;top:400px;width:300px;height:230px;z-index:4}
+.net{position:absolute;inset:-45px;overflow:visible;width:380px;height:380px}
+.layers{left:40px;top:470px;transform:scale(.78);transform-origin:0 0;width:300px;height:230px;z-index:4}
 .layer{position:absolute;left:0;width:250px;height:170px;border-radius:12px;transform:rotateX(58deg) rotateZ(-38deg);transform-origin:center;box-shadow:0 0 0 2px #ffd166,0 0 18px 2px rgba(255,209,102,.7),0 20px 30px -10px #12353f99;background-size:cover;background-position:center}
 /* info panel */
 .panel{left:30px;right:30px;top:636px;height:292px;background:rgba(255,255,255,.78);backdrop-filter:blur(10px);border:1.5px solid #fff;border-radius:30px;box-shadow:0 24px 50px -28px #12353f99;padding:18px;z-index:4}
@@ -85,15 +87,15 @@ h1 em{font-style:normal;color:var(--pri)}
 .loc i{width:52px;height:52px;border-radius:50%;border:2px solid #ffffffaa;display:grid;place-items:center;background:#ffffff1a}
 .loc b{display:block;font-size:21px;font-weight:900}.loc small{font-size:14px;color:#d6e6e2;font-weight:700}
 
-.obs{left:30px;right:30px;top:944px;z-index:4}
+.obs{left:30px;right:30px;top:940px;z-index:4}
 .obs-h{display:flex;align-items:center;gap:14px}
 .obs-h .badge{background:var(--ac);color:#3a2800;font-size:16px;font-weight:900;padding:3px 14px;border-radius:99px;white-space:nowrap}
 .obs-h h2{font-size:31px;font-weight:900;color:var(--pri);white-space:nowrap}
 .obs-h:after{content:"";flex:1;height:3px;background:linear-gradient(270deg,var(--ac),transparent)}
-.obs-sub{font-size:18px;font-weight:700;color:var(--mut);margin:4px 0 12px}
+.obs-sub{font-size:17.5px;font-weight:700;color:var(--mut);margin:4px 0 12px;line-height:1.7}
 .obs-sub b{color:var(--tx)}
 .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;direction:rtl;margin-bottom:12px}
-.flow div{position:relative;background:var(--pri);color:#fff;border-radius:16px;padding:9px 10px 9px 8px;font-size:18px;font-weight:900;display:flex;align-items:center;gap:9px;box-shadow:0 12px 24px -16px #0f4c4a}
+.flow div{position:relative;background:var(--pri);color:#fff;border-radius:16px;padding:9px 10px 9px 8px;font-size:16.5px;font-weight:900;display:flex;align-items:center;gap:9px;box-shadow:0 12px 24px -16px #0f4c4a}
 .flow div b{width:30px;height:30px;border-radius:50%;background:var(--ac);color:#3a2800;display:grid;place-items:center;font-size:17px;flex:none}
 .flow div small{display:block;font-size:13.5px;font-weight:600;color:#cfe3de}
 .flow div:not(:last-child):after{content:"";position:absolute;left:-19px;top:50%;margin-top:-8px;border:8px solid transparent;border-right:12px solid var(--ac);border-left:0}
@@ -126,12 +128,15 @@ h1 em{font-style:normal;color:var(--pri)}
  <div class="layer" style="top:0;background-image:radial-gradient(circle at 30% 40%,#d7302799,transparent 35%),radial-gradient(circle at 70% 60%,#fdae6199,transparent 40%),url(../assets/crop-natural.jpg)"></div>
 </div>
 
-<div class="abs hero">
+<div class="abs top">
  <div class="kicker">نخستین دوره · به مناسبت روز جهانی GIS · <span>23 Nov 2026</span></div>
- <h1>روز جهانی <em>GIS</em><br>ارومیه</h1>
+ <h1>روز جهانی <em>GIS</em> ارومیه</h1>
+</div>
+<div class="abs hero">
  <div id="wave"></div>
  <div class="axis"><mark>GeoAI | هوش مصنوعی در علوم مکانی</mark></div>
-<div class="sub">از لرزه‌نگاشت تا نقشه؛ از داده مکانی تا مدیریت هوشمند خطر و بحران</div>
+ <div class="formal">نشست تخصصی مدیران دستگاه‌های اجرایی، اساتید و کارشناسان</div>
+ <div class="sub">از لرزه‌نگاشت تا نقشه؛ از داده مکانی تا مدیریت هوشمند خطر و بحران</div>
 </div>
 
 <div class="abs panel">
@@ -154,18 +159,18 @@ h1 em{font-style:normal;color:var(--pri)}
 </div>
 
 <div class="abs obs">
- <div class="obs-h"><span class="badge">آغاز عمومی</span><h2>رصدخانه توسعه و تاب‌آوری استان</h2></div>
- <div class="obs-sub">بازوی تحلیلی تصمیم‌سازی استان؛ <b>داده نزد دارنده می‌ماند</b>، رصدخانه آن را می‌شناسد، متصل می‌کند و تحلیل می‌کند.</div>
+ <div class="obs-h"><span class="badge">آغاز عمومی برنامه</span><h2>رصدخانه توسعه و تاب‌آوری استان</h2></div>
+ <div class="obs-sub">بازوی تحلیلی شورای برنامه‌ریزی و ستاد توسعه استان؛ <b>داده‌ها نزد دستگاه‌های متولی باقی می‌ماند</b> و رصدخانه با شناسایی، اتصال استاندارد و تحلیل آن‌ها، پشتیبان تصمیم‌گیری مدیران استان خواهد بود.</div>
  <div class="flow">
-  <div><b>۱</b><span>شناسنامه داده<small>کاتالوگ فراداده استانی</small></span></div>
-  <div><b>۲</b><span>اتصال استاندارد<small>سرویس امن، بدون جابه‌جایی</small></span></div>
-  <div><b>۳</b><span>شاخص‌سازی<small>تأییدشده توسط کمیته علمی</small></span></div>
-  <div><b>۴</b><span>سناریو و تصمیم<small>داشبورد مدیران و ستاد بحران</small></span></div>
+  <div><b>۱</b><span>شناسنامه‌دار کردن داده‌ها<small>کاتالوگ فراداده استانی</small></span></div>
+  <div><b>۲</b><span>اتصال امن و استاندارد<small>بدون انتقال فیزیکی داده</small></span></div>
+  <div><b>۳</b><span>تدوین شاخص‌ها<small>با تأیید کمیته علمی</small></span></div>
+  <div><b>۴</b><span>تحلیل و تصمیم‌سازی<small>داشبورد مدیریتی و ستاد بحران</small></span></div>
  </div>
  <div class="twin">
-  <div class="tw"><h3><i style="background:var(--bg2)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f4c4a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></i>رصد توسعه <small>در شرایط عادی</small></h3>
+  <div class="tw"><h3><i style="background:var(--bg2)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0f4c4a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></i>رصد توسعه <small>پایش روند توسعه در شرایط عادی</small></h3>
    <div class="chips"><span>دسترسی به خدمات</span><span>جمعیت و مهاجرت</span><span>زیرساخت‌ها</span><span>آب و محیط زیست</span><span>نابرابری فضایی</span></div></div>
-  <div class="tw r"><h3><i style="background:#fdeee2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c0504d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M3 13h4l2-4 3 7 2-3h7"/></svg></i>رصد تاب‌آوری <small>آمادگی در برابر مخاطرات</small></h3>
+  <div class="tw r"><h3><i style="background:#fdeee2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c0504d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M3 13h4l2-4 3 7 2-3h7"/></svg></i>رصد تاب‌آوری <small>سنجش آمادگی در برابر مخاطرات</small></h3>
    <div class="chips"><span>زلزله</span><span>سیل</span><span>خشکسالی</span><span>فرونشست</span><span>دریاچه ارومیه</span><span>دسترسی امدادی</span></div></div>
  </div>
  <div class="prog"><span>سخنرانی‌های کلیدی</span><span>معرفی اطلس مخاطرات استان</span><span>پنل هم‌اندیشی مدیران و کارشناسان</span></div>
