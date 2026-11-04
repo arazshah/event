@@ -1,0 +1,145 @@
+<!doctype html><html lang="fa"><head><meta charset="utf-8"><link rel="stylesheet" href="common.css">
+<style>
+html,body{width:1080px;height:1920px;overflow:hidden}
+body{background:#0f4c4a}
+.sc{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:300px 80px 380px;gap:34px}
+.w{display:inline-block;font-weight:900;will-change:transform,opacity}
+.big{font-size:150px;line-height:1.15}
+.mid{font-size:92px;line-height:1.3}
+.sm{font-size:46px;font-weight:700;opacity:.92}
+.amber{color:#e9a62a}.dark{color:#12353f}
+.ic svg{width:330px;height:330px;overflow:visible}
+.ic path,.ic circle,.ic ellipse,.ic rect,.ic line{fill:none;stroke:#fff;stroke-width:4.2;stroke-linecap:round;stroke-linejoin:round}
+.dark .ic path,.ic.dk path,.ic.dk circle,.ic.dk rect,.ic.dk line,.ic.dk ellipse{stroke:#12353f}
+.ic .dot{fill:#e9a62a;stroke:none}
+.tile{position:absolute;will-change:transform}
+.strip{position:absolute;top:0;height:1920px;will-change:transform;display:none;z-index:50}
+.chip{display:inline-block;background:#ffffff26;border:3px solid #ffffff66;border-radius:99px;padding:6px 34px;font-size:40px;font-weight:800}
+.dark .chip{background:#12353f1a;border-color:#12353f55}
+.card{background:#ffffff;color:#12353f;border-radius:44px;padding:40px 50px;box-shadow:0 40px 80px -30px #000a;width:860px}
+.logos{display:flex;align-items:center;justify-content:center;gap:50px}
+.logos img{display:block;object-fit:contain}
+.sep{width:3px;height:150px;background:#d9e0d2}
+.url{direction:ltr;background:#e9a62a;color:#3a2800;font-size:76px;font-weight:900;padding:14px 56px;border-radius:30px;box-shadow:0 30px 60px -24px #0008}
+.spons{display:flex;gap:36px;align-items:flex-end;justify-content:center}
+.spons small{display:block;font-size:30px;font-weight:800;color:#0f4c4a;margin-bottom:8px}
+.spons .plate{background:#fff;border-radius:22px;padding:10px 18px;box-shadow:0 14px 30px -18px #0007}
+.spons img{display:block}
+</style></head><body>
+<div id="bg" style="position:absolute;inset:0"></div>
+
+<!-- 1. intro mosaic -->
+<section class="sc" id="s0">
+ <div class="tile" id="q1" style="left:0;top:0;width:540px;height:960px;background:#0f4c4a"></div>
+ <div class="tile" id="q2" style="left:540px;top:0;width:540px;height:960px;background:#4ea6b4"></div>
+ <div class="tile" id="q3" style="left:0;top:960px;width:540px;height:960px;background:#e9a62a"></div>
+ <div class="tile" id="q4" style="left:540px;top:960px;width:540px;height:960px;background:#7f9b62"></div>
+ <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;text-shadow:0 6px 30px #0006">
+  <span class="w big" data-d=".15">روز</span><span class="w big" data-d=".55">جهانی</span><span class="w big amber" data-d=".95" style="text-shadow:0 6px 30px #0009">GIS</span><span class="w big" data-d="1.35">ارومیه</span>
+  <span class="w chip" data-d="1.9" style="margin-top:30px;background:#0f4c4acc">نخستین دوره · نشست تخصصی</span>
+ </div>
+</section>
+
+<section class="sc" id="s1" data-bg="#0f4c4a">
+ <div class="ic"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="38"/><ellipse cx="50" cy="50" rx="16" ry="38"/><path d="M12 50H88M17 32Q50 40 83 32M17 68Q50 60 83 68"/><circle class="dot" cx="30" cy="30" r="3.2"/><circle class="dot" cx="70" cy="58" r="3.2"/><circle class="dot" cx="58" cy="24" r="3.2"/></svg></div>
+ <span class="w big amber" data-d=".1" style="direction:ltr">GeoAI</span>
+ <span class="w mid" data-d=".35">هوش مصنوعی<br>در علوم مکانی</span>
+</section>
+
+<section class="sc" id="s2" data-bg="#4ea6b4">
+ <div class="ic"><svg viewBox="0 0 100 100"><path d="M50 18L88 36L50 54L12 36Z"/><path d="M12 50L50 68L88 50"/><path d="M12 64L50 82L88 64"/><circle class="dot" cx="50" cy="36" r="3.4"/></svg></div>
+ <span class="w mid" data-d=".1">داده‌ی مکانی</span>
+ <span class="w sm" data-d=".4">شناسنامه‌دار · استاندارد · قابل اتصال</span>
+</section>
+
+<section class="sc dark" id="s3" data-bg="#e9a62a">
+ <div class="ic dk"><svg viewBox="0 0 100 100"><circle cx="50" cy="52" r="36"/><circle cx="50" cy="52" r="24"/><circle cx="50" cy="52" r="12"/><line id="sweep" x1="50" y1="52" x2="50" y2="16"/><circle class="dot" cx="66" cy="36" r="3.6" style="fill:#0f4c4a"/><circle class="dot" cx="34" cy="64" r="3.6" style="fill:#0f4c4a"/></svg></div>
+ <span class="w mid dark" data-d=".1">رصدخانه توسعه<br>و تاب‌آوری استان</span>
+ <span class="w chip dark" data-d=".45">آغاز عمومی برنامه</span>
+</section>
+
+<section class="sc" id="s4" data-bg="#7f9b62">
+ <div class="ic"><svg viewBox="0 0 100 100"><path d="M50 10L84 24V48C84 70 68 84 50 90C32 84 16 70 16 48V24Z"/><path d="M24 54H36L42 36L50 70L56 44L62 54H76"/></svg></div>
+ <span class="w mid" data-d=".1">مدیریت خطر<br>و بحران</span>
+ <span class="w sm" data-d=".4">زلزله · سیل · خشکسالی · فرونشست</span>
+</section>
+
+<section class="sc" id="s5" data-bg="#0f4c4a">
+ <div class="ic"><svg viewBox="0 0 100 100"><circle cx="22" cy="24" r="10"/><circle cx="78" cy="24" r="10"/><circle cx="22" cy="78" r="10"/><circle cx="78" cy="78" r="10"/><circle cx="50" cy="51" r="11"/><path d="M30 31L42 43M70 31L58 43M30 71L42 59M70 71L58 59"/></svg></div>
+ <span class="w mid" data-d=".1">شبکه‌سازی<br>با متخصصان</span>
+ <span class="w sm" data-d=".4">مدیران · اساتید · کارشناسان</span>
+</section>
+
+<section class="sc" id="s6" data-bg="#4ea6b4">
+ <div class="ic"><svg viewBox="0 0 100 100"><path d="M50 10C65 22 69 42 64 62H36C31 42 35 22 50 10Z"/><circle cx="50" cy="34" r="7"/><path d="M36 50L24 66H38M64 50L76 66H62"/><path d="M44 70L50 88L56 70"/></svg></div>
+ <span class="w mid" data-d=".1">رونمایی<br>محصولات هوشمند</span>
+</section>
+
+<section class="sc dark" id="s7" data-bg="#e9a62a">
+ <div class="ic dk"><svg viewBox="0 0 100 100"><path d="M12 86V56L30 66V56L48 66V44L88 58V86Z"/><path d="M22 76H28M40 76H46M60 76H66M74 76H80"/><path d="M28 24L50 14L72 24L50 34Z"/><path d="M62 29V40"/></svg></div>
+ <span class="w mid dark" data-d=".1">پیوند دانشگاه،<br>بازار و صنعت</span>
+ <span class="w sm dark" data-d=".4">بررسی چالش‌های بخش دولتی و خصوصی</span>
+</section>
+
+<section class="sc" id="s8" data-bg="#0f4c4a">
+ <span class="w chip" data-d=".05">زمان و مکان</span>
+ <span class="w mid" data-d=".2" style="font-size:80px">دوشنبه</span>
+ <span class="w amber" data-d=".35" style="font-size:300px;line-height:1;font-weight:900">۲ آذر</span>
+ <span class="w mid" data-d=".5" style="font-size:84px">۱۴۰۵</span>
+ <span class="w sm" data-d=".75" style="font-size:52px;font-weight:900">ساعت ۸ تا ۱۳</span>
+ <span class="w sm" data-d=".95" style="font-size:46px">سالن آرتیمیا · پردیس دانشگاه ارومیه</span>
+</section>
+
+<section class="sc" id="s9" data-bg="#f4f2e6" style="color:#12353f;gap:40px">
+ <div class="w card" data-d=".05">
+  <div class="logos"><img src="../../core/static/core/img/logo-urmia-university.png" style="height:200px"><div class="sep"></div><img src="../../core/static/core/img/logo-pajooheshkadeh.png" style="height:180px"></div>
+  <div style="font-size:38px;font-weight:800;line-height:1.7;margin-top:22px">دانشگاه ارومیه و پژوهشکده مدیریت خطرپذیری،<br>بحران و مهندسی زیرساخت‌ها <span style="background:#fbeec8;padding:0 14px;border-radius:12px;color:#0f4c4a">برگزار می‌کنند</span></div>
+ </div>
+ <span class="w" data-d=".35" style="font-size:96px;font-weight:900">روز جهانی <span style="color:#0f4c4a">GIS</span> ارومیه</span>
+ <span class="w" data-d=".55" style="font-size:44px;font-weight:800;color:#566b6f">ثبت‌نام رایگان و الزامی</span>
+ <span class="w url" data-d=".7" id="cta">event.postgis.ir</span>
+ <div class="w spons" data-d="1.05">
+  <div><small>حامی اجرایی</small><div class="plate"><img src="../../core/static/core/img/logo-zhasco.png" style="height:96px"></div></div>
+  <div><small>حامی فناوری مکانی</small><div class="plate" style="display:flex;align-items:center;gap:14px;background:#0f4c4a;color:#fff"><img src="../../core/static/core/img/logo-postgis.png" style="height:96px;border-radius:18px"><span style="font-size:30px;font-weight:900;line-height:1.3;text-align:right">پایگاه داده<br>مکانی ابری</span></div></div>
+ </div>
+</section>
+
+<div id="strips"></div>
+<script>
+const T=[0,3,5,7,9,11,13,15,17,20,24];
+const SC=[...document.querySelectorAll('.sc')];
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const E=x=>1-Math.pow(1-clamp(x),3);
+const B=x=>{x=clamp(x);const c=1.5;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const hash=n=>{const s=Math.sin(n*12.9898)*43758.5453;return s-Math.floor(s)};
+// prepare draw-on icons
+document.querySelectorAll('.ic path,.ic circle:not(.dot),.ic ellipse,.ic rect,.ic line').forEach(e=>{e.setAttribute('pathLength','1');e.style.strokeDasharray='1'});
+// transition strips
+const NS=5,strips=[];for(let i=0;i<NS;i++){const d=document.createElement('div');d.className='strip';d.style.left=(i*1080/NS)+'px';d.style.width=(1080/NS+1)+'px';document.getElementById('strips').appendChild(d);strips.push(d)}
+function render(t){
+  let k=0;while(k<SC.length-1&&t>=T[k+1])k++;
+  SC.forEach((s,i)=>s.style.display=i===k?'flex':'none');
+  const sc=SC[k],lt=t-T[k];
+  document.body.style.background=sc.dataset.bg||'#0f4c4a';
+  // words and blocks
+  sc.querySelectorAll('.w').forEach(w=>{const d=parseFloat(w.dataset.d||0);const p=B((lt-d)/.5);const o=E((lt-d)/.25);
+    w.style.opacity=o;w.style.transform=`translateY(${(1-p)*60}px) scale(${1.25-.25*p})`;});
+  // icon draw + hand-drawn "boil"
+  sc.querySelectorAll('.ic').forEach(ic=>{const p=E((lt-.05)/.9);
+    ic.querySelectorAll('path,circle:not(.dot),ellipse,rect,line').forEach(e=>e.style.strokeDashoffset=1-p);
+    ic.querySelectorAll('.dot').forEach((d,j)=>d.style.opacity=E((lt-.6-j*.12)/.2));
+    const f=Math.floor(t*8);ic.style.transform=`rotate(${(hash(f)-.5)*3}deg) translate(${(hash(f+7)-.5)*5}px,${(hash(f+3)-.5)*5}px) scale(${.9+.1*B(lt/.6)})`;});
+  const sw=document.getElementById('sweep');if(k===3){const a=lt*2.2;sw.setAttribute('x2',50+36*Math.sin(a));sw.setAttribute('y2',52-36*Math.cos(a))}
+  if(k===0){const p=[0,1,2,3].map(i=>E((t-i*.08)/.55));
+    q1.style.transform=`translate(${-(1-p[0])*540}px,0)`;q2.style.transform=`translate(0,${-(1-p[1])*960}px)`;
+    q3.style.transform=`translate(0,${(1-p[2])*960}px)`;q4.style.transform=`translate(${(1-p[3])*540}px,0)`;}
+  if(k===9){const c=document.getElementById('cta');c.style.transform+=` scale(${1+.035*Math.sin(lt*5)*E(lt-1)})`}
+  // strips wipe in the next scene colour just before each cut
+  const nk=k+1;let show=false;
+  if(nk<SC.length){const tt=T[nk],dur=.42;
+    if(t>tt-dur){show=true;const col=SC[nk].dataset.bg;
+      strips.forEach((s,i)=>{const p=E((t-(tt-dur)-i*.04)/(dur-.16));s.style.display='block';s.style.background=col;s.style.transform=`translateY(${(i%2?1:-1)*(1-p)*1920}px)`})}}
+  if(!show)strips.forEach(s=>s.style.display='none');
+}
+window.render=render;render(0);
+</script></body></html>

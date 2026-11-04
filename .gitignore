@@ -5,3 +5,4 @@ staticfiles/
 .env
 *.sqlite3
 promo/src/music.wav
+promo/src/music_gisday.wav
